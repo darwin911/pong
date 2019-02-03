@@ -1,0 +1,64 @@
+/* General Styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+html {
+  --ball-size: 20px;
+}
+body {
+  font-family: 'Helvetica', sans-serif;
+  background: #111111;
+  color: #eeeeee;
+  position: relative;
+  margin: 0;
+}
+/* /General Styles */
+
+.banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 80vw;
+  margin: 0 auto;
+}
+
+.title {
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.start-button {
+  padding: .5rem 1rem;
+  border-radius: 10%;
+}
+
+.score {
+  font-weight: 100;
+}
+
+.board {
+  position: relative;
+  border: 1px purple solid;
+  width: 90vw;
+  height: 80vh;
+  margin: 0 auto;
+}
+
+.paddle {
+  height: 90px;
+  width: 15px;
+  background: #ffffff;
+  position: absolute;
+  top: 40%; right: 0; bottom: 0; left: 0;
+}
+
+.ball {
+  width: var(--ball-size);
+  height: var(--ball-size);
+  background: white;
+  color: white;
+  border-radius: 40%;
+  position: absolute;
+  top: 40%; right: 0; bottom: 0; left: 50%;
+  transition: all 500ms linear;
+}
