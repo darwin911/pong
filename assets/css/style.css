@@ -48,7 +48,7 @@ body {
 
 .board {
   position: relative;
-  border: 1px purple dashed;
+  /* border: 1px purple dashed; */
   width: 100vw;
   height: 100vh;
   margin: 0 auto;

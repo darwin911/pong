@@ -9,21 +9,19 @@ const ball = body.querySelector('#ball');
 const turnBallRed = () => ball.style.backgroundColor = 'red';
 const turnBallWhite = () => ball.style.backgroundColor = 'white';
 
-const ballPos = {
-  x: 0,
-  y: 0
-}
+const ballPos = {x: 0, y: 0};
 
 const reset = () => {
   moveBall(window.innerWidth / 2, window.innerHeight / 2);
   turnBallWhite();
-}
+};
 
 const setBallPosition = () => {
   const ballPosition = ball.getBoundingClientRect();
   ballPos.x = ballPosition.x;
   ballPos.y = ballPosition.y;
-}
+  // console.log(ballPos.x, ballPos.y);
+};
 
 const createBall = () => {
   ball.classList.add('ball');
@@ -36,18 +34,20 @@ const moveBall = (x, y) => {
   ball.style.top = `${y}px`;
 };
 
+const moveTopCenter = () => moveBall(window.innerWidth / 2, 0);
+const moveCenterRight = () => moveBall(window.innerWidth - 40, window.innerHeight / 2);
+const moveBottomCenter = () => moveBall(window.innerWidth / 2, window.innerHeight - 40);
+const moveCenterLeft = () => moveBall(0, window.innerHeight / 2);
+
 const bounceBall = () => {
-  moveBall(target.x, target.y);
-  setTimeout( () => { moveBall(0, target.y) }, 401);
+  // debugger;
+  const topC = setTimeout(moveTopCenter, 0);
+  const centerR = setTimeout(moveCenterRight, 400);
+  const bottomC = setTimeout(moveBottomCenter, 800);
+  const centerL = setTimeout(moveCenterLeft, 1200);
 };
 
-let target = {
-  x: window.innerWidth - 20,
-  y: 200
-}
-
 const checkForCollision = () => {
-  // const ballPos = ball.getBoundingClientRect();
   const winW = window.innerWidth;
   const winH = window.innerHeight
   if (ballPos.x <= 0 || ballPos.y <= 0 || ballPos.x >= (winW - 40) || ballPos.y >= winH - 40) {
@@ -57,17 +57,14 @@ const checkForCollision = () => {
     turnBallWhite();
     return false;
   }
-}
-
-
-// board.addEventListener('mousemove', moveBallWithMouse);
+};
 
 // const moveBallWithMouse = e => {
-  //   const ballPos = ball.getBoundingClientRect()
-  //   ball.style.left = `${e.clientX - 20}px`;
-  //   ball.style.top = `${e.clientY - 20}px`;
-  //   checkForCollision(e, ballPos);
-  // }
+//   ball.style.left = `${e.clientX - 20}px`;
+//   ball.style.top = `${e.clientY - 20}px`;
+//   checkForCollision(e, ballPos);
+// }
+// board.addEventListener('mousemove', moveBallWithMouse);
 
 // const movePaddleWithMouse = e => {
 //   const y = e.clientY;
@@ -85,3 +82,4 @@ const startGame = () => {
 startGame();
 setInterval(checkForCollision, 100);
 setInterval(setBallPosition, 100);
+setInterval(bounceBall, 1600);
