@@ -25,8 +25,17 @@ const createBall = () => {
 const moveBall = (x, y) => {
   ball.style.left = `${x}px`;
   ball.style.top = `${y}px`;
-  setTimeout(checkForCollision, 401);
 };
+
+const bounceBall = () => {
+  moveBall(target.x, target.y);
+  setTimeout( () => { moveBall(0, target.y) }, 401);
+};
+
+let target = {
+  x: window.innerWidth - 20,
+  y: 200
+}
 
 const checkForCollision = () => {
   const ballPos = ball.getBoundingClientRect();
@@ -46,7 +55,6 @@ const moveBallWithMouse = e => {
   ball.style.left = `${e.clientX - 20}px`;
   ball.style.top = `${e.clientY - 20}px`;
   checkForCollision(e, ballPos);
-  console.log(checkForCollision(e, ballPos));
 }
 
 setInterval(checkForCollision, 100);
