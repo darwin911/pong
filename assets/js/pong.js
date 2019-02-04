@@ -8,48 +8,50 @@ const paddle = body.querySelector('#paddle');
 const ball = body.querySelector('#ball');
 
 
-const startGame = () => {
-  console.log('Start Game');
-  // board.addEventListener('mousemove', movePaddleWithMouse);
+const turnBallRed = () => ball.style.backgroundColor = 'red';
+const turnBallWhite = () => ball.style.backgroundColor = 'white';
+
+const reset = () => {
+  moveBall(window.innerWidth / 2, window.innerHeight / 2);
+  turnBallWhite();
+}
+
+const createBall = () => {
   ball.classList.add('ball');
+  ball.style.left = `${window.innerWidth / 2}px`;
+  ball.style.top = `${window.innerHeight / 2}px`;
 };
 
-const getBoundary = element => {
-  const elementBoundingRect = element.getBoundingClientRect();
-  console.log(elementBoundingRect);
-  return elementBoundingRect;
-}
+const moveBall = (x, y) => {
+  ball.style.left = `${x}px`;
+  ball.style.top = `${y}px`;
+  setTimeout(checkForCollision, 401);
+};
 
-const turnBallRed = () => {
-  ball.style.backgroundColor = 'red';
-}
-
-const checkForCollision = (e, ballPos) => {
-
-  if (ballPos.x < 0 || ballPos.y < 0) {
+const checkForCollision = () => {
+  const ballPos = ball.getBoundingClientRect();
+  const winW = window.innerWidth;
+  const winH = window.innerHeight
+  if (ballPos.x <= 0 || ballPos.y <= 0 || ballPos.x >= (winW - 40) || ballPos.y >= winH - 40) {
     turnBallRed();
-  } else if (ballPos.x >= (window.innerWidth - 40) ) {
-    turnBallRed();
-  } else if (ballPos.y >= (window.innerHeight - 40) ) {
-    turnBallRed();
+    return true;
   } else {
-    ball.style.backgroundColor = 'white';
+    turnBallWhite();
+    return false;
   }
 }
 
 const moveBallWithMouse = e => {
   const ballPos = ball.getBoundingClientRect()
-  console.log('ballPositionX: ', ballPos.x);
   ball.style.left = `${e.clientX - 20}px`;
   ball.style.top = `${e.clientY - 20}px`;
-  console.log('style left: ', ball.style.left);
   checkForCollision(e, ballPos);
+  console.log(checkForCollision(e, ballPos));
 }
 
-
+setInterval(checkForCollision, 100);
 board.addEventListener('mousemove', moveBallWithMouse);
 
-startButton.addEventListener('click', startGame);
 
 // const movePaddleWithMouse = e => {
 //   const y = e.clientY;
@@ -58,8 +60,10 @@ startButton.addEventListener('click', startGame);
 //   }
 // };
 
-const setBall = (x, y) => {
-  ball.style.left =
-}
+const startGame = () => {
+  reset();
+  createBall();
+};
+// startButton.addEventListener('click', startGame);
 
 startGame();
