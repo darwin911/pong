@@ -14,7 +14,7 @@ When _player_ clicks **Start** the ball will start moving towards left/right, it
 
 ## Wireframe
 
-[Pong Wireframe](img/pong-wireframe.jpg)
+[Pong Wireframe](assets/img/pong-wireframe.jpg)
 
 ### Banner 
 
@@ -64,8 +64,19 @@ When _player_ clicks **Start** the ball will start moving towards left/right, it
 - [ ] Implement collision detection that will check when the ball collides/touches the paddle or any side of the `board`. Potentially using `dataset` for the HTML elements, and CSS classes with transitions and / or keyframes.
 - [ ] Create JavaScript object to store state(s), settings and score.
 - [ ] Detect and store location of elements relative to each other when they collide.
-- [ ] Calculate new target for the colliding element `div.ball`. The ball should move in at a linear speed (Easy).
+- [ ] Calculate new target for the colliding element `div.ball`. The ball should move at a linear speed (Easy).
 - [ ] Optional: Difficulty Levels (Easy _default_, Intermediate, Hard, Bananas)
+
+## MVP
+
+- Ball moves on Start. Bounces off borders of `main.board`.
+
+## Post-MVP
+
+- Add Paddle bounce.
+- Add `lose()` function when ball goes past paddle.
+- Add `reset()` function to restart game.
+
 
 ## Reference
 
