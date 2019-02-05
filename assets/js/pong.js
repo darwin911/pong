@@ -138,7 +138,10 @@ setInterval( () => {
     console.log('bottom collision');
     flipY();
     move()
-  };
+  } else if (bPos.y <= 0) {
+    flipY();
+    move();
+  }
   console.log('nothing was called');
 } , 1000/4);
 
