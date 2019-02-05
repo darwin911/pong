@@ -31,11 +31,13 @@ body.addEventListener('mousemove', movePaddleWithMouse);
 
 const bPos = { x: 0, y: 0, dx: 1, dy: 1};
 const reset = () => {
-  bPos.x = (boardW / 2) - 20;
-  bPos.y = (boardH / 2) - 20;
+  bPos.x = ball.offsetTop;
+  bPos.y = ball.offsetLeft;
   moveBall(); turnBallWhite();
 };
 const createBall = () => {
+  const middleY = (boardW / 2) - 20;
+  const middleX = (boardH / 2) - 20;
   ball.classList.add('ball');
   move();
 };
@@ -72,8 +74,6 @@ const flipX = () => bPos.dx = -bPos.dx;
 
 const lose = () => {
   console.log('LOSE');
-  alert('You lost')
-  reset();
 }
 
 setInterval( () => {
@@ -89,8 +89,8 @@ setInterval( () => {
   } else if (y < 0) {
     flipY();
   } else if (x < 5 && y > pTop && y < pBottom) {
+    console.log('left side');
     flipX();
-  } else if (x < 5) {
     lose();
   }
   move();
