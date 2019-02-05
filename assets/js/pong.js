@@ -78,19 +78,19 @@ const newMove = (x, y, dx, dy) => {
 }
 
 const upRight = (x, y, dx, dy) => {
-      newMove(60, 60, 1, 1);
+      newMove(20, 20, 1, 1);
 };
 
 const downRight = (x, y, dx, dy) => {
-      newMove(60, 60, 1, -1);
+      newMove(20, 20, 1, -1);
 };
 
 const downLeft = (x, y, dx, dy) => {
-      newMove(60, 60, -1, -1);
+      newMove(20, 20, -1, -1);
 };
 
 const upLeft = (x, y, dx, dy) => {
-      newMove(60, 60, -1, 1);
+      newMove(20, 20, -1, 1);
 };
 
 const checkForCollision = () => {
