@@ -16,7 +16,7 @@ const reset = () => {
   moveBall(); turnBallWhite();
 };
 const setBallPosition = () => {
-  console.log(ballPos.x);
+  // console.log(ballPos.x);
   ballPos.x = ball.offsetLeft;
   ballPos.y = ball.offsetTop;
 };
@@ -41,14 +41,19 @@ const newMove = (x, y) => {
   moveBall();
 }
 const continuousMovement = (x, y) => {
-  if (!checkForCollision()) {
-    newMove(x, y);
-  }
-  if (checkForCollision()) {
-    newMove(x, -y);
-    console.log('deflection');
-  }
+
+  do {
+      newMove(x, y);
+  } while (!checkForCollision())
+
 }
+
+  // if (checkForCollision()) {
+  //   setTimeout( () => {
+  //     newMove(x, -y)}, 401);
+  //   console.log('should bounce');
+  // }
+
 const checkForCollision = () => {
   const w = board.offsetWidth;
   const h = board.offsetHeight;
@@ -63,8 +68,8 @@ const checkForCollision = () => {
 
 // This function is for debugging
 const moveBallWithMouse = e => {
-  ballPos.x = e.offsetX;
-  ballPos.y = e.offsetY;
+  ballPos.x = (e.offsetX - 20);
+  ballPos.y = (e.offsetY - 20);
   moveBall();
 }
 // board.addEventListener('mousemove', moveBallWithMouse);
@@ -86,7 +91,7 @@ const startGame = () => {
 // startButton.addEventListener('click', startGame);
 
 startGame();
-setInterval(checkForCollision, 50);
+// setInterval(checkForCollision, 50);
 setInterval(setBallPosition, 100);
 setInterval(setPaddlePosition, 100);
 setInterval(moveBall(), 10);
@@ -95,19 +100,19 @@ setInterval(moveBall(), 10);
 
 
 // setInterval( () => {
-  //   continuousMovement(100, 100);
-  // }, 100);
+//   continuousMovement(100, 100);
+// }, 100);
 
-  // const moveTopCenter = () => { moveBall();
-    // };
-    // const moveCenterRight = () => moveBall(window.innerWidth - 40, window.innerHeight / 2);
-    // const moveBottomCenter = () => moveBall(window.innerWidth / 2, window.innerHeight - 40);
-    // const moveCenterLeft = () => moveBall(0, window.innerHeight / 2);
-    //
-    // const bounceBall = () => {
-      //   // debugger;
-      //   const topC = setTimeout(moveTopCenter, 0);
-      //   const centerR = setTimeout(moveCenterRight, 400);
-      //   const bottomC = setTimeout(moveBottomCenter, 800);
-      //   const centerL = setTimeout(moveCenterLeft, 1200);
-      // };
+// const moveTopCenter = () => { moveBall();
+// };
+// const moveCenterRight = () => moveBall(window.innerWidth - 40, window.innerHeight / 2);
+// const moveBottomCenter = () => moveBall(window.innerWidth / 2, window.innerHeight - 40);
+// const moveCenterLeft = () => moveBall(0, window.innerHeight / 2);
+//
+// const bounceBall = () => {
+//   // debugger;
+//   const topC = setTimeout(moveTopCenter, 0);
+//   const centerR = setTimeout(moveCenterRight, 400);
+//   const bottomC = setTimeout(moveBottomCenter, 800);
+//   const centerL = setTimeout(moveCenterLeft, 1200);
+// };
