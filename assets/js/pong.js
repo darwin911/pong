@@ -78,19 +78,19 @@ const newMove = (x, y, dx, dy) => {
 }
 
 const upRight = (x, y, dx, dy) => {
-      newMove(50, 50, 1, 1);
+      newMove(20, 20, 1, 1);
 };
 
 const downRight = (x, y, dx, dy) => {
-      newMove(50, 50, 1, -1);
+      newMove(20, 20, 1, -1);
 };
 
 const downLeft = (x, y, dx, dy) => {
-      newMove(50, 50, -1, -1);
+      newMove(20, 20, -1, -1);
 };
 
 const upLeft = (x, y, dx, dy) => {
-      newMove(50, 50, -1, 1);
+      newMove(20, 20, -1, 1);
 };
 
 const checkForCollision = () => {
@@ -112,39 +112,35 @@ const move = () => {
   } else if (bPos.dx > 0 && bPos.dy < 0) {
     console.log('downRight');
     downRight();
-  } else if (box.dx < 0 && bPos.dy < 0) {
+  } else if (bPos.dx < 0 && bPos.dy < 0) {
     console.log('downLeft');
     downLeft();
+  } else {
+    upLeft();
   }
 };
 
-const bounceY = () => {
-  bPos.dy = -bPos.dy;
-};
-
-const bounceX = () => {
-  bPos.dx = -bPos.dx;
-}
+const flipY = () => bPos.dy = -bPos.dy;
+const flipX = () => bPos.dx = -bPos.dx;
 
 setInterval( () => {
-  debugger;
+  // debugger;
   boardW = board.offsetWidth;
   boardH = board.offsetHeight;
-  console.log(bPos.y)
-  console.log(checkForCollision());;
   if ( !checkForCollision() ) {
     console.log('no collision');
     move()
-  } else if (bPos.x >= boardW ) {
-    bounceX();
+  } else if (bPos.x >= boardW - 60 ) {
+    console.log('right side collision');
+    flipX();
     move();
-  } else if (bPos.y >= boardH ) {
-    console.log('flip Y');
-    bounceY();
+  } else if (bPos.y >= boardH - 60 ) {
+    console.log('bottom collision');
+    flipY();
     move()
   };
   console.log('nothing was called');
-} , 1000/2);
+} , 1000/4);
 
 // setInterval {
   // Function: check for collision. If collision, change direction
