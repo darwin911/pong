@@ -19,16 +19,12 @@ let boardH = board.offsetHeight;
 // ---------------------------------
 const turnBallRed = () => ball.style.backgroundColor = 'red';
 const turnBallWhite = () => ball.style.backgroundColor = 'white';
-const setPaddlePosition = () => {
-  const paddlePosition = paddle.getBoundingClientRect();
-  paddlePos.x = paddlePosition.x;
-  paddlePos.y = paddlePosition.y;
-};
 const paddlePos = {x: 0, y: 0};
+
 const movePaddleWithMouse = e => {
   const y = e.clientY;
   if (y > board.offsetTop  && y < board.offsetHeight) {
-    paddle.style.top = `${y-(board.offsetTop) - 0}px`;
+    paddle.style.top = `${y-(board.offsetTop) - 100}px`;
   }
 };
 body.addEventListener('mousemove', movePaddleWithMouse);
@@ -40,25 +36,23 @@ const reset = () => {
   moveBall(); turnBallWhite();
 };
 const createBall = () => {
-  const middleY = (board.offsetHeight / 2) - 20;
-  const middleX = (board.offsetWidth / 2) - 20;
+  const middleY = (boardW / 2) - 20;
+  const middleX = (boardH / 2) - 20;
   ball.classList.add('ball');
-  move(1, middleY, 1, -1);
+  move();
 };
 const moveBall = () => {
-  console.log('move');
   ball.style.left = `${bPos.x}px`;
   ball.style.top = `${bPos.y}px`;
 };
 const move = (x, y, dx, dy) => {
   bPos.x += bPos.dx * 1;
-  bPos.y += bPos.dy * 1;
+  bPos.y += bPos.dy * 5.9;
   moveBall();
 }
 
 const checkForCollision = () => {
-  const w = board.offsetWidth; const h = board.offsetHeight;
-  if (bPos.x < 1 || bPos.y < 10 || bPos.x >= (w - 40) || bPos.y >= h - 40) {
+  if (bPos.x < 1 || bPos.y < 10 || bPos.x >= (boardW - 40) || bPos.y >= boardH - 60) {
     turnBallRed(); return true;
   } else {
     turnBallWhite(); return false;
@@ -78,24 +72,25 @@ const flipX = () => bPos.dx = -bPos.dx;
 // }
 // board.addEventListener('mousemove', moveBallWithMouse);
 
+const lose = () => {
+  console.log('LOSE');
+}
+
 setInterval( () => {
-  boardW = board.offsetWidth;
-  boardH = board.offsetHeight;
   if ( !checkForCollision() ) {
-    // console.log('no collision');
-  } else if (bPos.x >= boardW - 60 ) {
+
+  } else if (bPos.x > boardW - 40 ) {
     flipX();
-  } else if (bPos.y >= boardH - 60 ) {
+  } else if (bPos.y > boardH - 40 ) {
+    console.log('flipY');
     flipY();
-  } else if (bPos.y <= 0) {
+  } else if (bPos.y < 0) {
     flipY();
-  } else if (bPos.x <= 0) {
-    // flipX();
+  } else if (bPos.x < 5) {
+    console.log('left side');
+
+    flipX();
+    lose();
   }
   move();
-} , 15);
-
-// setInterval {
-  // Function: check for collision. If collision, change direction
-  // Store Direction
-// }
+} , 20);
