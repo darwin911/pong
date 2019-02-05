@@ -1,11 +1,12 @@
+// const moveBallWithMouse = e => {
+  //   bPos.x = (e.offsetX - 20);
+  //   bPos.y = (e.offsetY - 20);
+  //   move();
+  // }
+  // board.addEventListener('mousemove', moveBallWithMouse);
 
 // This function is for debugging
 
-// const setbPosition = () => {
-  //   // console.log(bPos.x);
-  //   bPos.x = ball.offsetLeft;
-  //   bPos.y = ball.offsetTop;
-  // };
 const body = document.body;
 const banner = body.querySelector('#banner');
 const startButton = body.querySelector('#start-button');
@@ -14,6 +15,7 @@ const score = body.querySelector('#score');
 const board = body.querySelector('#board');
 const paddle = body.querySelector('#paddle');
 const ball = body.querySelector('#ball');
+let scoreboard = 0;
 let boardW = board.offsetWidth;
 let boardH = board.offsetHeight;
 // ---------------------------------
@@ -24,7 +26,7 @@ const paddlePos = {x: 0, y: 0};
 const movePaddleWithMouse = e => {
   const y = e.clientY;
   if (y > board.offsetTop  && y < board.offsetHeight) {
-    paddle.style.top = `${y-(board.offsetTop) - 100}px`;
+    paddle.style.top = `${y-(board.offsetTop) - 50}px`;
   }
 };
 body.addEventListener('mousemove', movePaddleWithMouse);
@@ -33,6 +35,8 @@ const bPos = { x: 0, y: 0, dx: 1, dy: 1};
 const reset = () => {
   bPos.x = (boardW / 2) - 20;
   bPos.y = (boardH / 2) - 20;
+  bPos.dx = 1;
+  scoreboard = 0;
   moveBall(); turnBallWhite();
 };
 const createBall = () => {
@@ -63,17 +67,16 @@ startGame();
 const flipY = () => bPos.dy = -bPos.dy;
 const flipX = () => bPos.dx = -bPos.dx;
 
-// const moveBallWithMouse = e => {
-//   bPos.x = (e.offsetX - 20);
-//   bPos.y = (e.offsetY - 20);
-//   move();
-// }
-// board.addEventListener('mousemove', moveBallWithMouse);
 
 const lose = () => {
   console.log('LOSE');
   alert('You lost')
   reset();
+}
+
+const updateScore = () => {
+  scoreboard += 1;
+  score.innerText = `Score: ${scoreboard}`
 }
 
 setInterval( () => {
@@ -89,6 +92,7 @@ setInterval( () => {
   } else if (y < 0) {
     flipY();
   } else if (x < 5 && y > pTop && y < pBottom) {
+    updateScore();
     flipX();
   } else if (x < 5) {
     lose();
