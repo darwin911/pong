@@ -78,19 +78,19 @@ const newMove = (x, y, dx, dy) => {
 }
 
 const upRight = (x, y, dx, dy) => {
-      newMove(20, 20, 1, 1);
+      newMove(60, 60, 1, 1);
 };
 
 const downRight = (x, y, dx, dy) => {
-      newMove(20, 20, 1, -1);
+      newMove(60, 60, 1, -1);
 };
 
 const downLeft = (x, y, dx, dy) => {
-      newMove(20, 20, -1, -1);
+      newMove(60, 60, -1, -1);
 };
 
 const upLeft = (x, y, dx, dy) => {
-      newMove(20, 20, -1, 1);
+      newMove(60, 60, -1, 1);
 };
 
 const checkForCollision = () => {
@@ -141,9 +141,12 @@ setInterval( () => {
   } else if (bPos.y <= 0) {
     flipY();
     move();
+  } else if (bPos.x <= 0) {
+    flipX();
+    move();
   }
   console.log('nothing was called');
-} , 1000/4);
+} , 600/2);
 
 // setInterval {
   // Function: check for collision. If collision, change direction
