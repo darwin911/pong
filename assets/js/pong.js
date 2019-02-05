@@ -50,48 +50,18 @@ const createBall = () => {
   const middleY = (board.offsetHeight / 2) - 20;
   const middleX = (board.offsetWidth / 2) - 20;
   ball.classList.add('ball');
-  newMove(1, middleY, 1, -1);
+  move(1, middleY, 1, -1);
 };
 const moveBall = () => {
   console.log('move');
   ball.style.left = `${bPos.x}px`;
   ball.style.top = `${bPos.y}px`;
 };
-const newMove = (x, y, dx, dy) => {
-  if (dx > 0) {
-    bPos.dx = dx;
-    bPos.x += x;
-  }
-  if (dx < 0) {
-    bPos.dx = dx;
-    bPos.x -= x;
-  }
-  if (dy > 0) {
-    bPos.dy = dy;
-    bPos.y -= y;
-  }
-  if (dy < 0) {
-    bPos.dy = dy;
-    bPos.y += y;
-  }
+const move = (x, y, dx, dy) => {
+  bPos.x += bPos.dx * 10;
+  bPos.y += bPos.dy * 10;
   moveBall();
 }
-
-const upRight = (x, y, dx, dy) => {
-      newMove(20, 20, 1, 1);
-};
-
-const downRight = (x, y, dx, dy) => {
-      newMove(20, 20, 1, -1);
-};
-
-const downLeft = (x, y, dx, dy) => {
-      newMove(20, 20, -1, -1);
-};
-
-const upLeft = (x, y, dx, dy) => {
-      newMove(20, 20, -1, 1);
-};
 
 const checkForCollision = () => {
   const w = board.offsetWidth; const h = board.offsetHeight;
@@ -105,21 +75,6 @@ const checkForCollision = () => {
 const startGame = () => { reset(); createBall(); };
 startGame();
 
-const move = () => {
-  if (bPos.dx > 0 && bPos.dy > 0) {
-    console.log('upRight');
-    upRight();
-  } else if (bPos.dx > 0 && bPos.dy < 0) {
-    console.log('downRight');
-    downRight();
-  } else if (bPos.dx < 0 && bPos.dy < 0) {
-    console.log('downLeft');
-    downLeft();
-  } else {
-    upLeft();
-  }
-};
-
 const flipY = () => bPos.dy = -bPos.dy;
 const flipX = () => bPos.dx = -bPos.dx;
 
@@ -129,24 +84,19 @@ setInterval( () => {
   boardH = board.offsetHeight;
   if ( !checkForCollision() ) {
     console.log('no collision');
-    move()
   } else if (bPos.x >= boardW - 60 ) {
     console.log('right side collision');
     flipX();
-    move();
   } else if (bPos.y >= boardH - 60 ) {
     console.log('bottom collision');
     flipY();
-    move()
   } else if (bPos.y <= 0) {
     flipY();
-    move();
   } else if (bPos.x <= 0) {
     flipX();
-    move();
   }
-  console.log('nothing was called');
-} , 600/2);
+  move();
+} , 100);
 
 // setInterval {
   // Function: check for collision. If collision, change direction
