@@ -1,12 +1,6 @@
 
 // This function is for debugging
-// const moveBallWithMouse = e => {
-  //   bPos.x = (e.offsetX - 20);
-  //   bPos.y = (e.offsetY - 20);
-  //   moveBall();
-  // }
-  // board.addEventListener('mousemove', moveBallWithMouse);
-  // ------------------------------------------------------
+
 // const setbPosition = () => {
   //   // console.log(bPos.x);
   //   bPos.x = ball.offsetLeft;
@@ -34,11 +28,10 @@ const paddlePos = {x: 0, y: 0};
 const movePaddleWithMouse = e => {
   const y = e.clientY;
   if (y > board.offsetTop  && y < board.offsetHeight) {
-    paddle.style.top = `${y-(board.offsetTop) - 45}px`;
+    paddle.style.top = `${y-(board.offsetTop) - 0}px`;
   }
 };
 body.addEventListener('mousemove', movePaddleWithMouse);
-// ---------------------------------
 
 const bPos = { x: 0, y: 0, dx: 1, dy: 1};
 const reset = () => {
@@ -58,14 +51,14 @@ const moveBall = () => {
   ball.style.top = `${bPos.y}px`;
 };
 const move = (x, y, dx, dy) => {
-  bPos.x += bPos.dx * 10;
-  bPos.y += bPos.dy * 10;
+  bPos.x += bPos.dx * 1;
+  bPos.y += bPos.dy * 1;
   moveBall();
 }
 
 const checkForCollision = () => {
   const w = board.offsetWidth; const h = board.offsetHeight;
-  if (bPos.x <= 0 || bPos.y <= 0 || bPos.x >= (w - 40) || bPos.y >= h - 40) {
+  if (bPos.x < 1 || bPos.y < 10 || bPos.x >= (w - 40) || bPos.y >= h - 40) {
     turnBallRed(); return true;
   } else {
     turnBallWhite(); return false;
@@ -78,25 +71,29 @@ startGame();
 const flipY = () => bPos.dy = -bPos.dy;
 const flipX = () => bPos.dx = -bPos.dx;
 
+// const moveBallWithMouse = e => {
+//   bPos.x = (e.offsetX - 20);
+//   bPos.y = (e.offsetY - 20);
+//   move();
+// }
+// board.addEventListener('mousemove', moveBallWithMouse);
+
 setInterval( () => {
-  // debugger;
   boardW = board.offsetWidth;
   boardH = board.offsetHeight;
   if ( !checkForCollision() ) {
-    console.log('no collision');
+    // console.log('no collision');
   } else if (bPos.x >= boardW - 60 ) {
-    console.log('right side collision');
     flipX();
   } else if (bPos.y >= boardH - 60 ) {
-    console.log('bottom collision');
     flipY();
   } else if (bPos.y <= 0) {
     flipY();
   } else if (bPos.x <= 0) {
-    flipX();
+    // flipX();
   }
   move();
-} , 100);
+} , 15);
 
 // setInterval {
   // Function: check for collision. If collision, change direction
