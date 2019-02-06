@@ -91,7 +91,7 @@ setInterval( () => {
     flipY();
   } else if (y < 0) {
     flipY();
-  } else if (x < 5 && y > pTop && y < pBottom) {
+  } else if (x < 0 && y > pTop && y < pBottom) {
     updateScore();
     flipX();
   } else if (x < 5) {
