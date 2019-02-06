@@ -48,8 +48,9 @@ const moveBall = () => {
   ball.style.top = `${bPos.y}px`;
 };
 const move = (x, y, dx, dy) => {
+  console.log(scoreboard);
   bPos.x += bPos.dx * 5;
-  bPos.y += bPos.dy * 2;
+  bPos.y += bPos.dy * 2.1;
   moveBall();
 }
 
@@ -67,10 +68,9 @@ startGame();
 const flipY = () => bPos.dy = -bPos.dy;
 const flipX = () => bPos.dx = -bPos.dx;
 
-
 const lose = () => {
   console.log('LOSE');
-  alert('You lost')
+  alert(`You lost. Your score was: ${scoreboard}`)
   reset();
 }
 
@@ -87,15 +87,11 @@ setInterval( () => {
 
   } else if (x > boardW - 40 ) {
     flipX();
-  } else if (y > boardH - 40 ) {
-    flipY();
-  } else if (y < 0) {
+  } else if (y > boardH - 40 || y < 0) {
     flipY();
   } else if (x < 0 && y > pTop && y < pBottom) {
-    updateScore();
-    flipX();
+    flipX(); updateScore();
   } else if (x < 5) {
     lose();
   }
-  move();
-} , 10);
+  move();} , 10);
