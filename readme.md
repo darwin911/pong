@@ -82,9 +82,9 @@ When _player_ clicks **Start** the ball will start moving towards left/right, it
 
 ## Code Snippet
 
-`Ball Location: x: 0, y: 0`;
+`Ball Location: x: 0, y: 0`
 
-`Ball Direction: dx: 1, dy: -1};`
+`Ball Direction: dx: 1, dy: -1`
 
 `moveBall()` updates the DOM style of `.ball`
 

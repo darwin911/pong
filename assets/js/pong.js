@@ -10,11 +10,13 @@ const ball = body.querySelector('#ball');
 let scoreboard = 0;
 let boardW = board.offsetWidth;
 let boardH = board.offsetHeight;
+let xMultiplier = 1;
+let yMultiplier = 1;
 //
 const turnBallRed = () => ball.style.backgroundColor = 'red';
 const turnBallWhite = () => ball.style.backgroundColor = 'white';
 // debugger;
-const movePaddleWithMouse = e => {
+const movePaddle = e => {
   const mouseY = e.clientY;
   if (mouseY > board.offsetTop  && mouseY < (board.offsetHeight + 50)) {
     paddle.style.top = `${mouseY - (board.offsetTop) - 50}px`;
@@ -29,6 +31,8 @@ const reset = () => {
   ballPos.y = (boardH / 2) - (ballSize / 2);
   ballPos.dx = 1;
   ballPos.dy = -1;
+  xMultiplier = 1;
+  yMultiplier = 1;
   score.innerText = `Score: ${scoreboard = 0}`
   turnBallWhite();
 };
@@ -44,13 +48,13 @@ const moveBall = () => {
 };
 
 const move = (x, y, dx, dy) => {
-  ballPos.x += ballPos.dx * (5 * 2);
-  ballPos.y += ballPos.dy * (2.2 * 2);
+  ballPos.x += ballPos.dx * (5 * xMultiplier);
+  ballPos.y += ballPos.dy * (2.2 * yMultiplier);
   moveBall();
 };
 
 const checkForCollision = () => {
-  if (ballPos.x <= 0 || ballPos.y < 1 || ballPos.x >= (boardW - ballSize) || ballPos.y >= boardH - ballSize) {
+  if (ballPos.x <= 0 || ballPos.y <= 0 || ballPos.x >= (boardW - ballSize) || ballPos.y >= boardH - ballSize) {
     turnBallRed(); return true;
   } else {
     turnBallWhite(); return false;
@@ -65,11 +69,11 @@ const play = () => {
 
   if ( !checkForCollision() ) {
 
-  } else if (x > boardW - 40 ) {
+  } else if (x >= boardW - 40 ) {
     flipX();
-  } else if (y > boardH - 40 || y < 0) {
+  } else if (y >= boardH - 40 || y < 0) {
     flipY();
-  } else if (x < 1 && y >= (pTop - 50) && y <= pBottom) {
+  } else if (x < 1 && y >= (pTop - 40) && y <= pBottom) {
     flipX(); addPoint();
   } else if (x < 0) {
     lose();
@@ -82,7 +86,8 @@ const startGame = () => {
   clearInterval(start);
   createBall();
   reset();
-  start = setInterval( play, 26);
+  startButton.classList.add('transparent');
+  start = setInterval( play, 15);
 };
 
 const flipY = () => ballPos.dy = -ballPos.dy;
@@ -91,13 +96,20 @@ const flipX = () => ballPos.dx = -ballPos.dx;
 const lose = () => {
   alert(`You lost. Your score was: ${scoreboard}`);
   clearInterval(start);
+  startButton.classList.remove('transparent');
   reset();
 };
 
 const addPoint = () => {
   scoreboard += 1;
   score.innerText = `Score: ${scoreboard}`;
+  addSpeed();
+};
+
+const addSpeed = () => {
+  xMultiplier *= 1.05;
+  yMultiplier *= 1.05;
 };
 
 startButton.addEventListener('click', startGame);
-body.addEventListener('mousemove', movePaddleWithMouse);
+body.addEventListener('mousemove', movePaddle);

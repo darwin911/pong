@@ -38,7 +38,7 @@ body {
 }
 
 .start-button {
-
+  transition: opacity 500ms ease;
 }
 
 .score {
@@ -77,3 +77,4 @@ body {
 }
 
 .red { background: red; }
+.transparent { opacity: 0;}
