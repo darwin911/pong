@@ -26,7 +26,7 @@ const paddlePos = {x: 0, y: 0};
 const movePaddleWithMouse = e => {
   const y = e.clientY;
   if (y > board.offsetTop  && y < board.offsetHeight) {
-    paddle.style.top = `${y-(board.offsetTop) - 50}px`;
+    paddle.style.top = `${y - (board.offsetTop) - 50}px`;
   }
 };
 body.addEventListener('mousemove', movePaddleWithMouse);
@@ -48,9 +48,8 @@ const moveBall = () => {
   ball.style.top = `${bPos.y}px`;
 };
 const move = (x, y, dx, dy) => {
-  console.log(scoreboard);
-  bPos.x += bPos.dx * 5;
-  bPos.y += bPos.dy * 2.1;
+  bPos.x += bPos.dx * (5 * 2);
+  bPos.y += bPos.dy * parseInt(2.1 * 2);
   moveBall();
 }
 
@@ -69,7 +68,6 @@ const flipY = () => bPos.dy = -bPos.dy;
 const flipX = () => bPos.dx = -bPos.dx;
 
 const lose = () => {
-  console.log('LOSE');
   alert(`You lost. Your score was: ${scoreboard}`)
   reset();
 }
@@ -83,13 +81,14 @@ setInterval( () => {
   const x = bPos.x; const y = bPos.y;
   const pTop = paddle.offsetTop;
   const pBottom = pTop + 100;
+  console.log(x, y);
   if ( !checkForCollision() ) {
 
   } else if (x > boardW - 40 ) {
     flipX();
   } else if (y > boardH - 40 || y < 0) {
     flipY();
-  } else if (x < 0 && y > pTop && y < pBottom) {
+  } else if (x < 0 && y > (pTop - 50) && y < pBottom) {
     flipX(); updateScore();
   } else if (x < 5) {
     lose();
