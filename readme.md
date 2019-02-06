@@ -4,13 +4,13 @@
 
 [Pong](https://en.wikipedia.org/wiki/Pong) is one of the earliest arcade video games. It is a table tennis sports game featuring simple two-dimensional graphics. The game was originally manufactured by Atari, which released it in 1972.
 
-## Intructions
+## Instructions
 
 Instructions will be presented to player by an `alert()` popup or a modal, as follows: 
 
  _The ball will move in any direction. You will score one (1) point every time the ball hits the paddle. You lose if the ball goes past the paddle. **Go bananas**._
 
-When _player_ clicks **Start** the ball will start moving towards left/right, it will bounce off the border of the **Board**. The user will then try to move the paddle (mouse/keypress) to avoid the ball hitting the left side of the screen. The _player_ earns one (1) point every time the ball collides with the paddle. The _playwer_ will lose the game when the ball goes past the paddle.
+When _player_ clicks **Start** the ball will start moving towards left/right, it will bounce off the border of the **Board**. The user will then try to move the paddle (mouse/keypress) to avoid the ball hitting the left side of the screen. The _player_ earns one (1) point every time the ball collides with the paddle. The _player_ will lose the game when the ball goes past the paddle.
 
 ## Wireframe
 
@@ -73,7 +73,7 @@ When _player_ clicks **Start** the ball will start moving towards left/right, it
 - `lose()` function when ball goes past paddle.
 - `reset()` function to restart game.
 - Scoreboard that keeps track of bounces off paddle.
-- Reponsive to viewport.
+- Responsive to viewport.
 
 ## Post-MVP
 
@@ -98,11 +98,11 @@ const move = (x, y, dx, dy) => {
 ```
 To adjust the speed at which the ball moves you can multiply `ballPos.dx` times any number. The difference in values of `dx` and `dy` will create a different angle to the balls trajectory.
 
-`checkForCollision()` is essentially a custom set of conditions that delinieate the border of the `.board` and adjusts for the size of `.ball` on the right and bottom sides.
+`checkForCollision()` is essentially a custom set of conditions that delineate the border of the `.board` and adjusts for the size of `.ball` on the right and bottom sides.
 
 ```
 const checkForCollision = () => {
-  
+
   if (ballPos.x <= 0 || ballPos.y < 1 || ballPos.x >= (boardW - ballSize) || ballPos.y >= boardH - ballSize) {
     turnBallRed();
     return true;

@@ -26,13 +26,12 @@ body {
   max-width: 80vw;
   margin: 0 auto;
   height: 10vh;
+  min-width: 320px;
   max-height: 10vh;
 }
 
 .title {
   font-family: 'Major Mono Display', 'Helvetica', sans-serif;
-  font-size: 4rem;
-  line-height: 1;
   margin: 0;
   text-transform: uppercase;
   text-align: center;
@@ -43,7 +42,7 @@ body {
 }
 
 .score {
-  font-weight: bold;
+  font-weight: 100;
 }
 
 .board {
