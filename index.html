@@ -13,9 +13,31 @@
 
   <header id="banner" class="banner">
 
+    <h1 id="title" class="title">pong</h1>
     <button id="start-button" class="start-button btn btn-secondary">Start</button>
 
-    <h1 id="title" class="title">pong</h1>
+<!-- https://bootswatch.com/darkly/
+    Took source code from this bootstrap template and adjusted to it for my version of Pong -->
+
+    <fieldset>
+      <div class="form-group">
+        <div class="custom-control custom-radio">
+          <input type="radio" id="easy" name="difficulty" class="custom-control-input" checked="">
+          <label class="custom-control-label" for="easy">Easy</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input type="radio" id="normal" name="difficulty" class="custom-control-input">
+          <label class="custom-control-label" for="normal">Normal</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input type="radio" id="hard" name="difficulty" class="custom-control-input">
+          <label class="custom-control-label" for="hard">Bananas</label>
+        </div>
+      </div>
+    </fieldset>
+
+      <!--   /   -->
+      
     <h4 id="score" class="score">Score: 0</h2>
 
   </header>
