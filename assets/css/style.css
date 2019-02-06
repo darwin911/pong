@@ -22,16 +22,17 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 80vw;
+  max-width: 85vw;
   margin: 0 auto;
-  padding: 1rem 0 0;
-  /* display: none; */
+  height: 15vh;
+  display: none;
 }
 
 .title {
   font-family: 'Major Mono Display', 'Helvetica', sans-serif;
-  font-size: 10vh;
-  margin: 1vh;
+  font-size: 4rem;
+  line-height: 1;
+  margin: 0;
   text-transform: uppercase;
   text-align: center;
 }
@@ -47,13 +48,14 @@ body {
 }
 
 .board {
+  background: #111;
   position: relative;
   border: 1px grey dashed;
   border-left: none;
   width: 80vw;
-  height: 600px;
+  height: 100vh;
   position: relative;
-  margin: 2rem auto 0;
+  margin: 0 auto;
 }
 
 .paddle {
