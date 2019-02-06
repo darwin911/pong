@@ -8,6 +8,7 @@ const board = body.querySelector('#board');
 const paddle = body.querySelector('#paddle');
 const ball = body.querySelector('#ball');
 let scoreboard = 0;
+let highestScore = 0;
 let boardW = board.offsetWidth;
 let boardH = board.offsetHeight;
 let xMultiplier = 1;
@@ -27,6 +28,7 @@ const ballPos = { x: 0, y: 0, dx: 1, dy: -1};
 const ballSize = 40;
 
 const reset = () => {
+  if (scoreboard > highestScore) highestScore = scoreboard;
   ballPos.x = (boardW / 2) - (ballSize / 2);
   ballPos.y = (boardH / 2) - (ballSize / 2);
   ballPos.dx = 1;
@@ -94,7 +96,13 @@ const flipY = () => ballPos.dy = -ballPos.dy;
 const flipX = () => ballPos.dx = -ballPos.dx;
 
 const lose = () => {
-  alert(`You lost. Your score was: ${scoreboard}`);
+  alert(`
+    PONG
+    ${'-'.repeat(10)}
+
+    You lost. Your score was: ${scoreboard}.
+    Highest Score: ${highestScore}
+        `);
   clearInterval(start);
   startButton.classList.remove('transparent');
   reset();
@@ -107,8 +115,8 @@ const addPoint = () => {
 };
 
 const addSpeed = () => {
-  xMultiplier *= 1.05;
-  yMultiplier *= 1.05;
+  xMultiplier *= 1.01;
+  yMultiplier *= 1.03;
 };
 
 startButton.addEventListener('click', startGame);
