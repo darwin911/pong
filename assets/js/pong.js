@@ -12,17 +12,15 @@ let boardH = board.offsetHeight;
 //
 const turnBallRed = () => ball.style.backgroundColor = 'red';
 const turnBallWhite = () => ball.style.backgroundColor = 'white';
-
+debugger;
 const movePaddleWithMouse = e => {
-  console.log(e.clientY);
-  const y = e.clientY;
-  if (y > board.offsetTop  && y < (board.offsetHeight + 50)) {
-    paddle.style.top = `${y - (board.offsetTop) - 50}px`;
+  const mouseY = e.clientY;
+  if (mouseY > board.offsetTop  && mouseY < (board.offsetHeight + 50)) {
+    paddle.style.top = `${mouseY - (board.offsetTop) - 50}px`;
   }
 };
-body.addEventListener('mousemove', movePaddleWithMouse);
 
-const ballPos = { x: 0, y: 0, dx: 1, dy: 1};
+const ballPos = { x: 0, y: 0, dx: 1, dy: -1};
 const bSize = 40;
 
 const reset = () => {
@@ -59,28 +57,25 @@ const checkForCollision = () => {
 };
 
 const startGame = () => {
-  reset();
   createBall();
+  reset();
 };
-
-startButton.addEventListener('click', startGame);
 
 const flipY = () => ballPos.dy = -ballPos.dy;
 const flipX = () => ballPos.dx = -ballPos.dx;
+const lose = () => { alert(`You lost. Your score was: ${scoreboard}`); reset(); }
 
-const lose = () => {
-  console.log('lose');
-  alert(`You lost. Your score was: ${scoreboard}`);
-   reset();
-}
 
 const addPoint = () => {
   scoreboard += 1;
   score.innerText = `Score: ${scoreboard}`
-}
+};
+
+startButton.addEventListener('click', startGame);
+body.addEventListener('mousemove', movePaddleWithMouse);
 
 setInterval( () => {
-  
+
   const x = ballPos.x; const y = ballPos.y;
   const pTop = paddle.offsetTop;
   const pBottom = pTop + 100;
