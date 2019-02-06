@@ -15,6 +15,7 @@ body {
   color: rgb(250, 250, 250);
   position: relative;
   margin: 0;
+  max-height: 100vh;
 }
 /* /General Styles */
 
@@ -22,10 +23,10 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 85vw;
+  max-width: 80vw;
   margin: 0 auto;
-  height: 15vh;
-  display: none;
+  height: 10vh;
+  max-height: 10vh;
 }
 
 .title {
@@ -38,9 +39,7 @@ body {
 }
 
 .start-button {
-  padding: .5rem 1rem;
-  border-radius: 10%;
-  font-size: 1rem;
+
 }
 
 .score {
@@ -48,14 +47,15 @@ body {
 }
 
 .board {
-  background: #111;
+  background: rgb(0, 0, 0);
   position: relative;
-  border: 1px grey dashed;
+  border-top: 1px rgba(255, 255, 255, .15) dashed;
   border-left: none;
-  width: 80vw;
-  height: 100vh;
+  width: 90vw;
+  height: 90vh;
   position: relative;
-  margin: 0 auto;
+  margin: 0 0 0 auto;
+  overflow: hidden;
 }
 
 .paddle {
@@ -69,14 +69,12 @@ body {
 .ball {
   width: var(--ball-size);
   height: var(--ball-size);
-  background: white;
-  color: white;
+  background: rgb(255, 255, 255);
   border-radius: 50%;
   position: absolute;
   top: 50%; left: 50%;
   border: 0;
+  /* display: none; */
 }
 
-.red {
-  background: red;
-}
+.red { background: red; }
