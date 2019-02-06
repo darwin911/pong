@@ -1,3 +1,4 @@
+let start;
 const body = document.body;
 const banner = body.querySelector('#banner');
 const startButton = body.querySelector('#start-button');
@@ -12,7 +13,7 @@ let boardH = board.offsetHeight;
 //
 const turnBallRed = () => ball.style.backgroundColor = 'red';
 const turnBallWhite = () => ball.style.backgroundColor = 'white';
-debugger;
+// debugger;
 const movePaddleWithMouse = e => {
   const mouseY = e.clientY;
   if (mouseY > board.offsetTop  && mouseY < (board.offsetHeight + 50)) {
@@ -21,11 +22,11 @@ const movePaddleWithMouse = e => {
 };
 
 const ballPos = { x: 0, y: 0, dx: 1, dy: -1};
-const bSize = 40;
+const ballSize = 40;
 
 const reset = () => {
-  ballPos.x = (boardW / 2) - 20;
-  ballPos.y = (boardH / 2) - 20;
+  ballPos.x = (boardW / 2) - (ballSize / 2);
+  ballPos.y = (boardH / 2) - (ballSize / 2);
   ballPos.dx = 1;
   ballPos.dy = -1;
   score.innerText = `Score: ${scoreboard = 0}`
@@ -49,38 +50,18 @@ const move = (x, y, dx, dy) => {
 };
 
 const checkForCollision = () => {
-  if (ballPos.x <= 0 || ballPos.y < 1 || ballPos.x >= (boardW - bSize) || ballPos.y >= boardH - bSize) {
+  if (ballPos.x <= 0 || ballPos.y < 1 || ballPos.x >= (boardW - ballSize) || ballPos.y >= boardH - ballSize) {
     turnBallRed(); return true;
   } else {
     turnBallWhite(); return false;
   }
 };
 
-const startGame = () => {
-  createBall();
-  reset();
-};
-
-const flipY = () => ballPos.dy = -ballPos.dy;
-const flipX = () => ballPos.dx = -ballPos.dx;
-const lose = () => { alert(`You lost. Your score was: ${scoreboard}`); reset(); }
-
-
-const addPoint = () => {
-  scoreboard += 1;
-  score.innerText = `Score: ${scoreboard}`
-};
-
-startButton.addEventListener('click', startGame);
-body.addEventListener('mousemove', movePaddleWithMouse);
-
-setInterval( () => {
-
+const play = () => {
   const x = ballPos.x; const y = ballPos.y;
   const pTop = paddle.offsetTop;
   const pBottom = pTop + 100;
-  boardH = board.offsetHeight;
-  boardW = board.offsetWidth;
+  boardH = board.offsetHeight; boardW = board.offsetWidth;
 
   if ( !checkForCollision() ) {
 
@@ -93,5 +74,30 @@ setInterval( () => {
   } else if (x < 0) {
     lose();
   }
+
   move();
-} , 26);
+}
+
+const startGame = () => {
+  clearInterval(start);
+  createBall();
+  reset();
+  start = setInterval( play, 26);
+};
+
+const flipY = () => ballPos.dy = -ballPos.dy;
+const flipX = () => ballPos.dx = -ballPos.dx;
+
+const lose = () => {
+  alert(`You lost. Your score was: ${scoreboard}`);
+  clearInterval(start);
+  reset();
+};
+
+const addPoint = () => {
+  scoreboard += 1;
+  score.innerText = `Score: ${scoreboard}`;
+};
+
+startButton.addEventListener('click', startGame);
+body.addEventListener('mousemove', movePaddleWithMouse);

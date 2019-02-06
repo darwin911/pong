@@ -57,26 +57,61 @@ When _player_ clicks **Start** the ball will start moving towards left/right, it
 ## Implementation
 
 - [X] Base HTML, CSS &amp; JS.
-- [ ] Initialize game with `start.button` with click or `enter/return`.
-- [ ] Paddle movement with mouse and / or arrow keys.
-- [ ] Obtain current height and width of `main.board`.
-- [ ] Assign paddle movement relative to mouse movement or arrow keys.
-- [ ] Implement collision detection that will check when the ball collides/touches the paddle or any side of the `board`. Potentially using `dataset` for the HTML elements, and CSS classes with transitions and / or keyframes.
+- [X] Initialize game with `start.button` with click or `enter/return`.
+- [X] Paddle movement with mouse.
+- [X] Obtain current height and width of `main.board`.
+- [X] Assign paddle movement relative to mouse movement or arrow keys.
+- [X] Implement collision detection that will check when the ball collides/touches the paddle or any side of the `board`.
 - [ ] Create JavaScript object to store state(s), settings and score.
-- [ ] Detect and store location of elements relative to each other when they collide.
-- [ ] Calculate new target for the colliding element `div.ball`. The ball should move at a linear speed (Easy).
+- [X] Detect and store location of elements relative to each other when they collide.
 - [ ] Optional: Difficulty Levels (Easy _default_, Intermediate, Hard, Bananas)
 
 ## MVP
 
 - Ball moves on Start. Bounces off borders of `main.board`.
+- Detect Paddle collision and make ball bounce.
+- `lose()` function when ball goes past paddle.
+- `reset()` function to restart game.
+- Scoreboard that keeps track of bounces off paddle.
+- Reponsive to viewport.
 
 ## Post-MVP
 
-- Add Paddle bounce.
-- Add `lose()` function when ball goes past paddle.
-- Add `reset()` function to restart game.
+- Difficulty levels (Easy, Normal, Hard, **Bananas**)
+- Store Highest Score in Local/Session Storage and display along current Score.
 
+## Code Snippet
+
+`Ball Location: x: 0, y: 0`;
+
+`Ball Direction: dx: 1, dy: -1};`
+
+`moveBall()` updates the DOM style of `.ball`
+
+`move()` takes the direction(dx and dy), and adds those values to `x` and `y` of `.ball`. This is what makes the ball move in `x/y` direction.
+```
+const move = (x, y, dx, dy) => {
+  ballPos.x += ballPos.dx
+  ballPos.y += ballPos.dy * (2.2 * 2);
+  moveBall();
+};
+```
+To adjust the speed at which the ball moves you can multiply `ballPos.dx` times any number. The difference in values of `dx` and `dy` will create a different angle to the balls trajectory.
+
+`checkForCollision()` is essentially a custom set of conditions that delinieate the border of the `.board` and adjusts for the size of `.ball` on the right and bottom sides.
+
+```
+const checkForCollision = () => {
+  
+  if (ballPos.x <= 0 || ballPos.y < 1 || ballPos.x >= (boardW - ballSize) || ballPos.y >= boardH - ballSize) {
+    turnBallRed();
+    return true;
+  } else {
+    turnBallWhite();
+    return false;
+  }
+};
+```
 
 ## Reference
 
