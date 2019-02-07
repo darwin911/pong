@@ -17,7 +17,7 @@ let highestScore = 0;
 let xMultiplier = 1;
 let yMultiplier = 1;
 const ballPos = { x: 20, y: 20, dx: 1, dy: -1};
-const ballSize = 40;
+const ballSize = 50;
 
 const movePaddle = e => {
   const mouseY = e.clientY;
@@ -45,13 +45,18 @@ const moveBall = () => {
 };
 
 const move = (x, y, dx, dy) => {
-  ballPos.x += ballPos.dx * (4 * xMultiplier);
+  ballPos.x += ballPos.dx * (2 * xMultiplier);
   ballPos.y += ballPos.dy * (1.2 * yMultiplier);
   moveBall();
 };
 
 const checkForCollision = () => {
-  if (ballPos.x <= 10 || ballPos.y <= 10 || ballPos.x >= (boardW - (ballSize)) || ballPos.y >= boardH - ballSize) {
+  const x = ballPos.x;
+  const y = ballPos.y;
+  if (x <= 1 || y <= 1) {
+    console.log('collision');
+    return true;
+  } else if (x >= (boardW - (ballSize)) || y >= boardH - ballSize) {
     console.log('collision');
     return true;
   } else {
@@ -86,10 +91,10 @@ const play = () => {
   checkDifficulty();
   if ( !checkForCollision() ) {
 
-  } else if (x >= boardW - 50 ) {
+  } else if (x >= boardW - 40 ) {
     // if ball is at right side
     flipX();
-  } else if (y <= 5 || y >= boardH - 50) {
+  } else if (y <= 1 || y >= boardH - 50) {
     // if ball is at top or bottom
     flipY();
   } else if (x <= 4 && y >= (pTop - 40) && y <= pBottom) {

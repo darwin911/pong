@@ -38,10 +38,6 @@ body {
   text-align: center;
 }
 
-.start-button {
-
-}
-
 .score {
   font-weight: 100;
 }
@@ -55,6 +51,7 @@ body {
   position: relative;
   margin: 0 0 0 auto;
   cursor: crosshair;
+  /* border: 1px solid red; */
 }
 
 .paddle {
