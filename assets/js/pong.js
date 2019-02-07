@@ -37,7 +37,7 @@ const reset = () => {
 
 const createBall = () => {
   ball.classList.add('ball');
-  ball.style.display = "block";
+  ball.style.display = 'block';
 };
 
 const moveBall = () => {
@@ -52,7 +52,7 @@ const move = (x, y, dx, dy) => {
 };
 
 const checkForCollision = () => {
-  if (ballPos.x <= 0 || ballPos.y <= 0 || ballPos.x >= (boardW - ballSize + 5) || ballPos.y >= boardH - ballSize) {
+  if (ballPos.x <= 1 || ballPos.y <= 1 || ballPos.x >= (boardW - ballSize + 5) || ballPos.y >= boardH - ballSize) {
     return true;
   } else {
     return false;
@@ -71,7 +71,7 @@ const checkDifficulty = () => {
     yMultiplier = 2;
   } else if (hard.checked) {
     hard.nextElementSibling.style.color = 'yellow';
-    ball.style.backgroundColor = 'yellow';
+    ball.style.background = 'red';
     xMultiplier = 3.5;
     yMultiplier = 5;
   }
@@ -89,7 +89,7 @@ const play = () => {
 
   } else if (x >= boardW - 40 ) {
     flipX();
-  } else if (y >= boardH - 40 || y < 0) {
+  } else if (y >= boardH - 40 || y <= 1) {
     flipY();
   } else if (x <= 1 && y >= (pTop - 40) && y <= pBottom) {
     flipX(); addPoint();

@@ -54,6 +54,7 @@ body {
   height: 85vh;
   position: relative;
   margin: 0 0 0 auto;
+  cursor: none;
 }
 
 .paddle {
@@ -76,3 +77,11 @@ body {
 
 .red { background: red; }
 .transparent { opacity: 0;}
+
+.crazy-ball {
+  background: -webkit-linear-gradient(127deg, rgba(255, 0, 0, 0.8), rgba(255, 0, 0, 0) 70.71),
+   -webkit-linear-gradient(37deg, rgba(0, 255, 0, 0.8), rgba(0, 255, 0, 0) 70.71), -webkit-linear-gradient(246deg, rgba(0, 0, 255, 0.8), rgba(0, 0, 255, 0) 70.71);
+  background: -o-linear-gradient(127deg, rgba(255, 0, 0, 0.8), rgba(255, 0, 0, 0) 70.71), -o-linear-gradient(37deg, rgba(0, 255, 0, 0.8), rgba(0, 255, 0, 0) 70.71), -o-linear-gradient(246deg, rgba(0, 0, 255, 0.8), rgba(0, 0, 255, 0) 70.71);
+  background: linear-gradient(217deg, rgba(255, 0, 0, 0.8), rgba(255, 0, 0, 0) 70.71),
+   linear-gradient(127deg, rgba(0, 255, 0, 0.8), rgba(0, 255, 0, 0) 70.71), linear-gradient(336deg, rgba(0, 0, 255, 0.8), rgba(0, 0, 255, 0) 70.71);
+}
