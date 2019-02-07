@@ -91,7 +91,7 @@ const play = () => {
     flipX();
   } else if (y >= boardH - 40 || y < 0) {
     flipY();
-  } else if (x < 1 && y >= (pTop - 40) && y <= pBottom) {
+  } else if (x <= 1 && y >= (pTop - 40) && y <= pBottom) {
     flipX(); addPoint();
   } else if (x < 0) {
     lose();
