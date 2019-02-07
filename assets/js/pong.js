@@ -91,13 +91,13 @@ const play = () => {
   checkDifficulty();
   if ( !checkForCollision() ) {
 
-  } else if (x >= boardW - 40 ) {
+  } else if (x >= boardW - ballSize ) {
     // if ball is at right side
     flipX();
-  } else if (y <= 1 || y >= boardH - 50) {
+  } else if (y <= 1 || y >= boardH - ballSize) {
     // if ball is at top or bottom
     flipY();
-  } else if (x <= 4 && y >= (pTop - 40) && y <= pBottom) {
+  } else if (x <= 4 && y >= (pTop - ballSize) && y <= pBottom) {
     // if ball is at left side and where the paddle is located
     flipX(); addPoint();
   } else if (x <= 1) {
