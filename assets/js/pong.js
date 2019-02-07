@@ -52,7 +52,7 @@ const move = (x, y, dx, dy) => {
 };
 
 const checkForCollision = () => {
-  if (ballPos.x <= 1 || ballPos.y <= 1 || ballPos.x >= (boardW - ballSize + 5) || ballPos.y >= boardH - ballSize) {
+  if (ballPos.x <= 1 || ballPos.y <= 1 || ballPos.x >= (boardW - ballSize) || ballPos.y >= boardH - ballSize) {
     return true;
   } else {
     return false;
@@ -64,16 +64,16 @@ const checkDifficulty = () => {
   const normal = document.querySelector('#normal');
   const hard = document.querySelector('#hard');
   if (easy.checked) {
-    xMultiplier = 1;
-    yMultiplier = 1;
-  } else if (normal.checked) {
     xMultiplier = 2;
     yMultiplier = 2;
+  } else if (normal.checked) {
+    xMultiplier = 2.5;
+    yMultiplier = 2.5;
   } else if (hard.checked) {
     hard.nextElementSibling.style.color = 'yellow';
-    ball.style.background = 'red';
-    xMultiplier = 3.5;
-    yMultiplier = 5;
+    ball.style.background = 'linear-gradient(217deg, rgba(255, 0, 0, 0.8), rgba(255, 0, 0, 0) 70.71), linear-gradient(127deg, rgba(0, 255, 0, 0.8), rgba(0, 255, 0, 0) 70.71), linear-gradient(336deg, rgba(0, 0, 255, 0.8), rgba(0, 0, 255, 0) 70.71);';
+    xMultiplier = 4;
+    yMultiplier = 7;
   }
 };
 
@@ -105,7 +105,7 @@ const startGame = () => {
   createBall();
   reset();
   startButton.classList.add('transparent');
-  start = setInterval( play, 15);
+  start = setInterval( play, 10);
 };
 
 const flipY = () => ballPos.dy = -ballPos.dy;
@@ -130,8 +130,8 @@ const addPoint = () => {
 };
 
 const addSpeed = () => {
-  xMultiplier *= 1.01;
-  yMultiplier *= 1.03;
+  xMultiplier *= 1.02;
+  yMultiplier *= 1.10;
 };
 
 startButton.addEventListener('click', startGame);
