@@ -1,4 +1,3 @@
-let start;
 const body = document.body;
 const banner = body.querySelector('#banner');
 const startButton = body.querySelector('#start-button');
@@ -10,13 +9,14 @@ const ball = body.querySelector('#ball');
 const easy = document.querySelector('#easy');
 const normal = document.querySelector('#normal');
 const hard = document.querySelector('#hard');
+let start;
 let boardW = board.offsetWidth;
 let boardH = board.offsetHeight;
 let scoreboard = 0;
 let highestScore = 0;
 let xMultiplier = 1;
 let yMultiplier = 1;
-const ballPos = { x: 0, y: 0, dx: 1, dy: -1};
+const ballPos = { x: 20, y: 20, dx: 1, dy: -1};
 const ballSize = 40;
 
 const movePaddle = e => {
@@ -51,7 +51,8 @@ const move = (x, y, dx, dy) => {
 };
 
 const checkForCollision = () => {
-  if (ballPos.x <= 1 || ballPos.y <= 10 || ballPos.x >= (boardW - (ballSize + 25)) || ballPos.y >= boardH - ballSize) {
+  if (ballPos.x <= 10 || ballPos.y <= 10 || ballPos.x >= (boardW - (ballSize)) || ballPos.y >= boardH - ballSize) {
+    console.log('collision');
     return true;
   } else {
     return false;
@@ -86,12 +87,15 @@ const play = () => {
   if ( !checkForCollision() ) {
 
   } else if (x >= boardW - 50 ) {
+    // if ball is at right side
     flipX();
-  } else if (y >= boardH - 50 || y <= 5) {
+  } else if (y <= 5 || y >= boardH - 50) {
+    // if ball is at top or bottom
     flipY();
-  } else if (x <= 1 && y >= (pTop - 40) && y <= pBottom) {
+  } else if (x <= 4 && y >= (pTop - 40) && y <= pBottom) {
+    // if ball is at left side and where the paddle is located
     flipX(); addPoint();
-  } else if (x < 0) {
+  } else if (x <= 1) {
     lose();
   }
 
