@@ -34,7 +34,7 @@ const reset = () => {
   ballPos.dy = -1;
   xMultiplier = 1;
   yMultiplier = 1;
-  score.innerText = `Score: ${scoreboard = 0}`
+  score.innerText = `${scoreboard = 0}`
 };
 
 const createBall = () => { ball.classList.add('ball'); };
@@ -122,14 +122,15 @@ const lose = () => {
   alert(`
     PONG
     ${'-'.repeat(10)}
-    You lost. Your score was: ${scoreboard}
+    You lost.
+    Score: ${scoreboard}
     Highest Score: ${highestScore}`);
   reset();
 };
 
 const addPoint = () => {
   scoreboard += 1;
-  score.innerText = `Score: ${scoreboard}`;
+  score.innerText = `${scoreboard}`;
 };
 
 body.addEventListener('mousemove', movePaddle);

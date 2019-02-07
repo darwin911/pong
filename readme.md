@@ -33,27 +33,6 @@ When _player_ clicks **Start** the ball will start moving towards left/right, it
 - CSS (Flexbox)
 - JavaScript
 
-## HTML Structure
-
-```
-  <header id="banner" class="banner">
-
-    <button id="start-button" class="start-button">Start</button>
-
-    <h1 id="title" class="title">pong</h1>
-    <h2 id="score" class="score">Score: 0</h2>
-
-  </header>
-
-  <main id="board" class="board">
-
-    <div id="paddle" class="paddle"></div>
-
-    <div id="ball" class="ball"></div>
-
-  </main>
-
-```
 ## Implementation
 
 - [X] Base HTML, CSS &amp; JS.
@@ -77,7 +56,7 @@ When _player_ clicks **Start** the ball will start moving towards left/right, it
 
 ## Post-MVP
 
-- Difficulty levels (Easy, Normal, Hard, **Bananas**)
+- Difficulty levels (Easy, Normal, **Bananas**)
 - Store Highest Score in Local/Session Storage and display along current Score.
 
 ## Code Snippet
@@ -111,6 +90,59 @@ const checkForCollision = () => {
     return false;
   }
 };
+```
+
+## To-Do
+
+The collision detection and flipX and flipY conditions should be abstracted and consolidated, since the current functions are mapping slightly different borders that will either detect a collision and / or flip the direction of the ball.
+
+```
+const checkForCollision = () => {
+  const x = ballPos.x;
+  const y = ballPos.y;
+  if (x <= 1 || y <= 1) {
+    console.log('collision');
+    return true;
+  } else if (x >= (boardW - (ballSize)) || y >= boardH - ballSize) {
+    console.log('collision');
+    return true;
+  } else {
+    return false;
+  }
+};
+```
+
+
+```
+const play = () => {
+  const x = ballPos.x;
+  const y = ballPos.y;
+
+  const pTop = paddle.offsetTop;
+  const pBottom = pTop + 100;
+
+  boardH = board.offsetHeight;
+  boardW = board.offsetWidth;
+
+  checkDifficulty();
+
+  if ( !checkForCollision() ) {
+
+  } else if (x >= boardW - 40 ) {
+    // if ball is at right side
+    flipX();
+  } else if (y <= 1 || y >= boardH - 50) {
+    // if ball is at top or bottom
+    flipY();
+  } else if (x <= 4 && y >= (pTop - 40) && y <= pBottom) {
+    // if ball is at left side and where the paddle is located
+    flipX(); addPoint();
+  } else if (x <= 1) {
+    lose();
+  }
+
+  move();
+}
 ```
 
 ## Reference
