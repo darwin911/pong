@@ -1,4 +1,4 @@
-##### Project 1 — WDI — Darwin Smith — 02/04/2019 
+##### Project 1 — WDI — Darwin Smith — 02/07/2019 
 
 # **PONG!**
 
@@ -58,6 +58,8 @@ When _player_ clicks **Start** the ball will start moving towards left/right, it
 
 - Difficulty levels (Easy, Normal, **Bananas**)
 - Store Highest Score in Local/Session Storage and display along current Score.
+- Second Paddle
+- Change speed/direction on impact with paddle
 
 ## Code Snippet
 

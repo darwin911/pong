@@ -9,6 +9,9 @@ const ball = body.querySelector('#ball');
 const easy = document.querySelector('#easy');
 const normal = document.querySelector('#normal');
 const hard = document.querySelector('#hard');
+
+const ballPos = { x: 20, y: 20, dx: 1, dy: -1};
+const ballSize = 50;
 let start;
 let boardW = board.offsetWidth;
 let boardH = board.offsetHeight;
@@ -16,8 +19,6 @@ let scoreboard = 0;
 let highestScore = 0;
 let xMultiplier = 1;
 let yMultiplier = 1;
-const ballPos = { x: 20, y: 20, dx: 1, dy: -1};
-const ballSize = 50;
 
 const movePaddle = e => {
   const mouseY = e.clientY;
@@ -50,14 +51,26 @@ const move = (x, y, dx, dy) => {
   moveBall();
 };
 
+const flipY = () => ballPos.dy = -ballPos.dy;
+const flipX = () => ballPos.dx = -ballPos.dx;
+
+const lose = () => {
+  clearInterval(start);
+  alert(`
+  PONG
+  ${'-'.repeat(10)}
+  You lost.
+  Score: ${scoreboard}
+  Highest Score: ${highestScore}`);
+  reset();
+};
+
 const checkForCollision = () => {
   const x = ballPos.x;
   const y = ballPos.y;
   if (x <= 1 || y <= 1) {
-    console.log('collision');
     return true;
   } else if (x >= (boardW - (ballSize)) || y >= boardH - ballSize) {
-    console.log('collision');
     return true;
   } else {
     return false;
@@ -105,7 +118,7 @@ const play = () => {
   }
 
   move();
-}
+};
 
 const startGame = () => {
   clearInterval(start);
@@ -114,19 +127,6 @@ const startGame = () => {
   start = setInterval( play, 10);
 };
 
-const flipY = () => ballPos.dy = -ballPos.dy;
-const flipX = () => ballPos.dx = -ballPos.dx;
-
-const lose = () => {
-  clearInterval(start);
-  alert(`
-    PONG
-    ${'-'.repeat(10)}
-    You lost.
-    Score: ${scoreboard}
-    Highest Score: ${highestScore}`);
-  reset();
-};
 
 const addPoint = () => {
   scoreboard += 1;
