@@ -54,7 +54,7 @@ body {
   height: 85vh;
   position: relative;
   margin: 0 0 0 auto;
-  cursor: none;
+  cursor: crosshair;
 }
 
 .paddle {

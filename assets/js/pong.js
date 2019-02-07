@@ -52,7 +52,7 @@ const move = (x, y, dx, dy) => {
 };
 
 const checkForCollision = () => {
-  if (ballPos.x <= 1 || ballPos.y <= 1 || ballPos.x >= (boardW - ballSize) || ballPos.y >= boardH - ballSize) {
+  if (ballPos.x <= 1 || ballPos.y <= 1 || ballPos.x >= (boardW - ballSize + 10) || ballPos.y >= boardH - ballSize) {
     return true;
   } else {
     return false;
@@ -67,8 +67,8 @@ const checkDifficulty = () => {
     xMultiplier = 2;
     yMultiplier = 2;
   } else if (normal.checked) {
-    xMultiplier = 2.5;
-    yMultiplier = 2.5;
+    xMultiplier = 3;
+    yMultiplier = 3.2;
   } else if (hard.checked) {
     hard.nextElementSibling.style.color = 'yellow';
     ball.style.background = 'linear-gradient(217deg, rgba(255, 0, 0, 0.8), rgba(255, 0, 0, 0) 70.71), linear-gradient(127deg, rgba(0, 255, 0, 0.8), rgba(0, 255, 0, 0) 70.71), linear-gradient(336deg, rgba(0, 0, 255, 0.8), rgba(0, 0, 255, 0) 70.71);';
@@ -87,7 +87,7 @@ const play = () => {
   checkDifficulty();
   if ( !checkForCollision() ) {
 
-  } else if (x >= boardW - 40 ) {
+  } else if (x >= boardW - 60 ) {
     flipX();
   } else if (y >= boardH - 40 || y <= 1) {
     flipY();
@@ -112,14 +112,13 @@ const flipY = () => ballPos.dy = -ballPos.dy;
 const flipX = () => ballPos.dx = -ballPos.dx;
 
 const lose = () => {
+  clearInterval(start);
+  startButton.classList.remove('transparent');
   alert(`
     PONG
     ${'-'.repeat(10)}
-    You lost. Your score was: ${scoreboard}.
-    Highest Score: ${highestScore}
-        `);
-  clearInterval(start);
-  startButton.classList.remove('transparent');
+    You lost. Your score was: ${scoreboard}
+    Highest Score: ${highestScore}`);
   reset();
 };
 
@@ -136,3 +135,4 @@ const addSpeed = () => {
 
 startButton.addEventListener('click', startGame);
 body.addEventListener('mousemove', movePaddle);
+body.addEventListener('keydown', startGame);
