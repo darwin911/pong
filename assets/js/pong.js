@@ -7,13 +7,18 @@ const score = body.querySelector('#score');
 const board = body.querySelector('#board');
 const paddle = body.querySelector('#paddle');
 const ball = body.querySelector('#ball');
-let scoreboard = 0;
-let highestScore = 0;
+const easy = document.querySelector('#easy');
+const normal = document.querySelector('#normal');
+const hard = document.querySelector('#hard');
 let boardW = board.offsetWidth;
 let boardH = board.offsetHeight;
+let scoreboard = 0;
+let highestScore = 0;
 let xMultiplier = 1;
 let yMultiplier = 1;
-// debugger;
+const ballPos = { x: 0, y: 0, dx: 1, dy: -1};
+const ballSize = 40;
+
 const movePaddle = e => {
   const mouseY = e.clientY;
   if (mouseY > board.offsetTop  && mouseY < (board.offsetHeight + 100)) {
@@ -21,13 +26,10 @@ const movePaddle = e => {
   }
 };
 
-const ballPos = { x: 0, y: 0, dx: 1, dy: -1};
-const ballSize = 40;
-
 const reset = () => {
   if (scoreboard > highestScore) highestScore = scoreboard;
-  ballPos.x = (boardW / 2) - (ballSize / 2);
-  ballPos.y = (boardH / 2) - (ballSize / 2);
+  ballPos.x = (boardW / 2) - ballSize;
+  ballPos.y = (boardH / 2) - ballSize;
   ballPos.dx = 1;
   ballPos.dy = -1;
   xMultiplier = 1;
@@ -35,10 +37,7 @@ const reset = () => {
   score.innerText = `Score: ${scoreboard = 0}`
 };
 
-const createBall = () => {
-  ball.classList.add('ball');
-  ball.style.display = 'block';
-};
+const createBall = () => { ball.classList.add('ball'); };
 
 const moveBall = () => {
   ball.style.left = `${ballPos.x}px`;
@@ -52,7 +51,7 @@ const move = (x, y, dx, dy) => {
 };
 
 const checkForCollision = () => {
-  if (ballPos.x <= 1 || ballPos.y <= 1 || ballPos.x >= (boardW - ballSize + 10) || ballPos.y >= boardH - ballSize) {
+  if (ballPos.x <= 1 || ballPos.y <= 10 || ballPos.x >= (boardW - (ballSize + 25)) || ballPos.y >= boardH - ballSize) {
     return true;
   } else {
     return false;
@@ -60,24 +59,23 @@ const checkForCollision = () => {
 };
 
 const checkDifficulty = () => {
-  const easy = document.querySelector('#easy');
-  const normal = document.querySelector('#normal');
-  const hard = document.querySelector('#hard');
   if (easy.checked) {
+    hard.nextElementSibling.style.color = 'white';
+    ball.style.background = 'white';
     xMultiplier = 2;
     yMultiplier = 2;
   } else if (normal.checked) {
+    hard.nextElementSibling.style.color = 'white';
+    ball.style.background = 'white';
     xMultiplier = 3;
     yMultiplier = 3.2;
   } else if (hard.checked) {
     hard.nextElementSibling.style.color = 'yellow';
-    ball.style.background = 'linear-gradient(217deg, rgba(255, 0, 0, 0.8), rgba(255, 0, 0, 0) 70.71), linear-gradient(127deg, rgba(0, 255, 0, 0.8), rgba(0, 255, 0, 0) 70.71), linear-gradient(336deg, rgba(0, 0, 255, 0.8), rgba(0, 0, 255, 0) 70.71);';
+    ball.style.background = 'orangered';
     xMultiplier = 4;
     yMultiplier = 7;
   }
 };
-
-checkDifficulty();
 
 const play = () => {
   const x = ballPos.x; const y = ballPos.y;
@@ -87,9 +85,9 @@ const play = () => {
   checkDifficulty();
   if ( !checkForCollision() ) {
 
-  } else if (x >= boardW - 60 ) {
+  } else if (x >= boardW - 50 ) {
     flipX();
-  } else if (y >= boardH - 40 || y <= 1) {
+  } else if (y >= boardH - 50 || y <= 5) {
     flipY();
   } else if (x <= 1 && y >= (pTop - 40) && y <= pBottom) {
     flipX(); addPoint();
@@ -104,7 +102,6 @@ const startGame = () => {
   clearInterval(start);
   createBall();
   reset();
-  startButton.classList.add('transparent');
   start = setInterval( play, 10);
 };
 
@@ -113,7 +110,6 @@ const flipX = () => ballPos.dx = -ballPos.dx;
 
 const lose = () => {
   clearInterval(start);
-  startButton.classList.remove('transparent');
   alert(`
     PONG
     ${'-'.repeat(10)}
@@ -125,14 +121,7 @@ const lose = () => {
 const addPoint = () => {
   scoreboard += 1;
   score.innerText = `Score: ${scoreboard}`;
-  addSpeed();
 };
 
-const addSpeed = () => {
-  xMultiplier *= 1.02;
-  yMultiplier *= 1.10;
-};
-
-startButton.addEventListener('click', startGame);
 body.addEventListener('mousemove', movePaddle);
 body.addEventListener('keydown', startGame);
