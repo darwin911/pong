@@ -52,6 +52,7 @@ body {
   position: relative;
   margin: 0 0 0 auto;
   cursor: crosshair;
+  border: 1px solid transparent;
 }
 
 .paddle {
