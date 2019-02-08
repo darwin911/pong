@@ -18,7 +18,7 @@ let scoreboard = 0;
 let highestScore = 0;
 let xMultiplier = 1;
 let yMultiplier = 1;
-let addVelocity = 1;
+let speed = 10;
 
 const movePaddle = e => {
   const mouseY = e.clientY;
@@ -39,13 +39,13 @@ const reset = () => {
 const createBall = () => { ball.classList.add('ball'); };
 
 const moveBall = () => {
-  ball.style.left = `${ballPos.x}px`;
-  ball.style.top = `${ballPos.y}px`;
+  ball.style.left = `${ballPos.x * 1}px`;
+  ball.style.top = `${ballPos.y * 1}px`;
 };
 
 const move = (x, y, dx, dy) => {
-  ballPos.x += ballPos.dx;
-  ballPos.y += ballPos.dy;
+  ballPos.x += ballPos.dx * 6.;
+  ballPos.y += -ballPos.dy * 6;
   moveBall();
 };
 
@@ -63,6 +63,7 @@ const lose = () => {
   reset();
 };
 
+
 const checkForCollision = () => {
   const x = ballPos.x; const y = ballPos.y;
   const pTop = paddle.offsetTop;
@@ -76,7 +77,7 @@ const checkForCollision = () => {
     return true;
   } else if (y > boardH - ballSize) {
     return true;
-  } else if (x < 0 && y > (pTop - ballSize) && y < pBottom) {
+  } else if (x <= 0 && y > (pTop - ballSize) && y < pBottom) {
     return true;
   } else {
     return false;
@@ -87,8 +88,7 @@ const checkForCollision = () => {
 //   if (easy.checked) {
 //     hard.nextElementSibling.style.color = 'white';
 //     ball.style.background = 'white';
-//     xMultiplier = 2;
-//     yMultiplier = 2;
+
 //   } else if (normal.checked) {
 //     hard.nextElementSibling.style.color = 'white';
 //     ball.style.background = 'white';
@@ -106,8 +106,7 @@ const play = () => {
   if (!checkForCollision()) {
     move();
   } else {
-
-    if         (ballPos.dx > 0 && ballPos.dy < 0) {
+    if (ballPos.dx > 0 && ballPos.dy < 0) {
       flipX();
       move();
     } else if (ballPos.dx > 0 && ballPos.dy > 0) {
@@ -120,15 +119,18 @@ const play = () => {
       flipX();
       move();
     }
+  }
 
+  if (ballPos.x < -20) {
+    lose();
   }
 };
 
 const startGame = () => {
-  clearInterval(start); 
+  clearInterval(start);
   createBall();
   reset();
-  start = setInterval( play, 5);
+  start = setInterval( play, speed);
 };
 
 const addPoint = () => {

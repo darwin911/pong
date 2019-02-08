@@ -11,7 +11,9 @@ html {
 }
 body {
   font-family: 'Raleway', 'Helvetica', sans-serif;
-  background: rgb(2, 2, 2);
+  background: -webkit-linear-gradient(left, #4b6cb7 0%, #182848 100%);
+  background: -o-linear-gradient(left, #4b6cb7 0%, #182848 100%);
+  background: linear-gradient(to right, #4b6cb7 0%, #182848 100%);
   color: rgb(250, 250, 250);
   position: relative;
   margin: 0;
@@ -44,7 +46,6 @@ body {
 }
 
 .board {
-  background: rgb(0, 0, 0);
   position: relative;
   border: 0;
   width: 90vw;
@@ -52,15 +53,15 @@ body {
   position: relative;
   margin: 0 0 0 auto;
   cursor: crosshair;
-  border: 1px solid transparent;
+  overflow-x: hidden;
 }
 
 .paddle {
   height: var(--paddle-height);
   width: var(--paddle-width);
-  background: #ffffff;
+  background: #aaa;
   position: absolute;
-  top: 40%; right: 0; bottom: 0; left: -5px;
+  top: 40%; right: 0; bottom: 0; left: -2px;
   cursor: pointer;
 }
 
@@ -68,6 +69,9 @@ body {
   width: var(--ball-size);
   height: var(--ball-size);
   background: rgb(255, 255, 255);
+  background: -webkit-linear-gradient(left, #f8ff00 0%, #3ad59f 100%);
+  background: -o-linear-gradient(left, #f8ff00 0%, #3ad59f 100%);
+  background: linear-gradient(to right, #f8ff00 0%, #3ad59f 100%);
   border-radius: 50%;
   position: absolute;
   top: 50%; left: 50%;
