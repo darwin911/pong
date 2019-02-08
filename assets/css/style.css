@@ -61,8 +61,9 @@ body {
   width: var(--paddle-width);
   background: #aaa;
   position: absolute;
-  top: 40%; right: 0; bottom: 0; left: -2px;
+  top: 40%; right: 0; bottom: 0; left: 0px;
   cursor: pointer;
+  border-radius: 2px;
 }
 
 .ball {
@@ -83,7 +84,7 @@ fieldset {
 
 @media screen and (max-width: 500px) {
   html {
-    --ball-size: 20px;
+    /* --ball-size: 20px; */
   }
   fieldset {
     font-size: .75rem;
