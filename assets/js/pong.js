@@ -63,9 +63,12 @@ const lose = () => {
 };
 
 const deflect = () => {
-  vMove *= 1.5;
+  if (Math.random() < 0.5) {
+    vMove *= 1.05;
+  } else {
+    hMove *= 1.05;
+  }
 }
-
 
 const checkForCollision = () => {
   const x = ballObj.x; const y = ballObj.y;
