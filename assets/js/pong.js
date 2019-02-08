@@ -9,8 +9,8 @@ const ball = body.querySelector('#ball');
 const easy = document.querySelector('#easy');
 const normal = document.querySelector('#normal');
 const hard = document.querySelector('#hard');
-const ballPos = { x: 20, y: 20, dx: 1, dy: -1};
-const ballSize = 50;
+const ballPos = { x: 20, y: 20, dx: 1, dy: 1};
+const ballSize = 40;
 let start;
 let boardW = board.offsetWidth;
 let boardH = board.offsetHeight;
@@ -18,6 +18,7 @@ let scoreboard = 0;
 let highestScore = 0;
 let xMultiplier = 1;
 let yMultiplier = 1;
+let addVelocity = 1;
 
 const movePaddle = e => {
   const mouseY = e.clientY;
@@ -31,9 +32,7 @@ const reset = () => {
   ballPos.x = (boardW / 2) - ballSize;
   ballPos.y = (boardH / 2) - ballSize;
   ballPos.dx = 1;
-  ballPos.dy = -1;
-  xMultiplier = 1;
-  yMultiplier = 1;
+  ballPos.dy = 1;
   score.innerText = `${scoreboard = 0}`
 };
 
@@ -44,11 +43,9 @@ const moveBall = () => {
   ball.style.top = `${ballPos.y}px`;
 };
 
-let addVelocity = 1;
-
 const move = (x, y, dx, dy) => {
-  ballPos.x += ballPos.dx * (2 * xMultiplier * addVelocity);
-  ballPos.y += ballPos.dy * (1.2 * yMultiplier * addVelocity);
+  ballPos.x += ballPos.dx;
+  ballPos.y += ballPos.dy;
   moveBall();
 };
 
@@ -67,69 +64,71 @@ const lose = () => {
 };
 
 const checkForCollision = () => {
-  const x = ballPos.x;
-  const y = ballPos.y;
-  if (x <= 1 || y <= 1) {
+  const x = ballPos.x; const y = ballPos.y;
+  const pTop = paddle.offsetTop;
+  const pBottom = pTop + 100;
+  boardH = board.offsetHeight; boardW = board.offsetWidth;
+
+  if (y < 0) {
+    // Ball hits top border
     return true;
-  } else if (x >= boardW - ballSize || y >= boardH - ballSize) {
+  } else if (x > boardW - ballSize){
+    return true;
+  } else if (y > boardH - ballSize) {
+    return true;
+  } else if (x < 0 && y > (pTop - ballSize) && y < pBottom) {
     return true;
   } else {
     return false;
   }
 };
 
-const checkDifficulty = () => {
-  if (easy.checked) {
-    hard.nextElementSibling.style.color = 'white';
-    ball.style.background = 'white';
-    xMultiplier = 2;
-    yMultiplier = 2;
-  } else if (normal.checked) {
-    hard.nextElementSibling.style.color = 'white';
-    ball.style.background = 'white';
-    xMultiplier = 3;
-    yMultiplier = 3.2;
-  } else if (hard.checked) {
-    hard.nextElementSibling.style.color = 'yellow';
-    ball.style.background = 'orangered';
-    xMultiplier = 4;
-    yMultiplier = 7;
-  }
-};
+// const checkDifficulty = () => {
+//   if (easy.checked) {
+//     hard.nextElementSibling.style.color = 'white';
+//     ball.style.background = 'white';
+//     xMultiplier = 2;
+//     yMultiplier = 2;
+//   } else if (normal.checked) {
+//     hard.nextElementSibling.style.color = 'white';
+//     ball.style.background = 'white';
+//   } else if (hard.checked) {
+//
+//   }
+// };
 
 const play = () => {
   const x = ballPos.x; const y = ballPos.y;
   const pTop = paddle.offsetTop;
   const pBottom = pTop + 100;
   boardH = board.offsetHeight; boardW = board.offsetWidth;
-  checkDifficulty();
 
-  console.log(x, y);
+  if (!checkForCollision()) {
+    move();
+  } else {
 
-  if ( !checkForCollision() ) {
+    if         (ballPos.dx > 0 && ballPos.dy < 0) {
+      flipX();
+      move();
+    } else if (ballPos.dx > 0 && ballPos.dy > 0) {
+      flipY();
+      move();
+    } else if (ballPos.dx < 0 && ballPos.dy < 0) {
+      flipY();
+      move();
+    } else if (ballPos.dx < 0 && ballPos.dy > 0) {
+      flipX();
+      move();
+    }
 
-  } else if (x >= boardW - ballSize ) {
-    // if ball is at right side
-    flipX();
-  } else if (y <= 5 || y >= boardH - ballSize) {
-    // if ball is at top or bottom
-    flipY();
-  } else if (x <= 4 && y >= (pTop - ballSize) && y <= pBottom) {
-    // if ball is at left side and where the paddle is located
-    flipX(); addPoint();
-    addVelocity += 0.0125;
-  } else if (x <= 1) {
-    lose();
   }
-
-  move();
 };
 
 const startGame = () => {
-  clearInterval(start);
+  clearInterval(start); 
   createBall();
   reset();
-  start = setInterval( play, 1000/120);
+  start = setInterval( play, 5);
 };
 
 const addPoint = () => {
@@ -139,3 +138,6 @@ const addPoint = () => {
 
 body.addEventListener('mousemove', movePaddle);
 body.addEventListener('keydown', startGame);
+
+
+// Math.random() < 0.5
