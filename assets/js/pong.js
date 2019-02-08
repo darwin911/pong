@@ -9,16 +9,15 @@ const ball = body.querySelector('#ball');
 const easy = document.querySelector('#easy');
 const normal = document.querySelector('#normal');
 const hard = document.querySelector('#hard');
-const ballPos = { x: 20, y: 20, dx: 1, dy: 1};
+const ballPos = { x: 0, y: 0, dx: 0, dy: 0};
 const ballSize = 40;
 let start;
 let boardW = board.offsetWidth;
 let boardH = board.offsetHeight;
 let scoreboard = 0;
 let highestScore = 0;
-let xMultiplier = 1;
-let yMultiplier = 1;
-let speed = 10;
+let hMove = 5;
+let vMove = 5;
 
 const movePaddle = e => {
   const mouseY = e.clientY;
@@ -39,13 +38,13 @@ const reset = () => {
 const createBall = () => { ball.classList.add('ball'); };
 
 const moveBall = () => {
-  ball.style.left = `${ballPos.x * 1}px`;
-  ball.style.top = `${ballPos.y * 1}px`;
+  ball.style.left = `${ballPos.x}px`;
+  ball.style.top = `${ballPos.y}px`;
 };
 
 const move = (x, y, dx, dy) => {
-  ballPos.x += ballPos.dx * 6.;
-  ballPos.y += -ballPos.dy * 6;
+  ballPos.x += ballPos.dx * hMove;
+  ballPos.y += -ballPos.dy * vMove;
   moveBall();
 };
 
@@ -77,7 +76,7 @@ const checkForCollision = () => {
     return true;
   } else if (y > boardH - ballSize) {
     return true;
-  } else if (x <= 0 && y > (pTop - ballSize) && y < pBottom) {
+  } else if (x < 0 && y > (pTop - ballSize) && y < pBottom) {
     return true;
   } else {
     return false;
@@ -112,11 +111,14 @@ const play = () => {
     } else if (ballPos.dx > 0 && ballPos.dy > 0) {
       flipY();
       move();
+      console.log('top');
     } else if (ballPos.dx < 0 && ballPos.dy < 0) {
+      console.log('bottom');
       flipY();
       move();
     } else if (ballPos.dx < 0 && ballPos.dy > 0) {
       flipX();
+      addPoint();
       move();
     }
   }
@@ -130,7 +132,7 @@ const startGame = () => {
   clearInterval(start);
   createBall();
   reset();
-  start = setInterval( play, speed);
+  start = setInterval( play, 20);
 };
 
 const addPoint = () => {

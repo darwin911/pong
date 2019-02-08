@@ -53,7 +53,7 @@ body {
   position: relative;
   margin: 0 0 0 auto;
   cursor: crosshair;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .paddle {
