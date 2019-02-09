@@ -6,9 +6,9 @@ const score = body.querySelector('#score');
 const board = body.querySelector('#board');
 const paddle = body.querySelector('#paddle');
 const ball = body.querySelector('#ball');
-const easy = document.querySelector('#easy');
-const normal = document.querySelector('#normal');
-const hard = document.querySelector('#hard');
+const easy = body.querySelector('#easy');
+const normal = body.querySelector('#normal');
+const hard = body.querySelector('#hard');
 const ballObj = { x: 0, y: 0, dx: 1, dy: 1, size: 40};
 let start;
 let boardW = board.offsetWidth;
@@ -31,7 +31,7 @@ const reset = () => {
   ballObj.y = (boardH / 2) - ballObj.size;
   ballObj.dx = 1; ballObj.dy = 1;
   hMove = 5; vMove = 5;
-  score.innerText = `${scoreboard = 0}`
+  score.innerText = `${scoreboard = 0}`;
 };
 
 const createBall = () => { ball.classList.add('ball'); };
@@ -41,34 +41,34 @@ const moveBall = () => {
   ball.style.top = `${ballObj.y}px`;
 };
 
-const move = (x, y, dx, dy) => {
-  console.log(`x: ${ballObj.x}, y: ${ballObj.y}, dx: ${ballObj.dx}, dy: ${ballObj.dy}, angle: ${ballObj.dx/ballObj.dy}`);
+const move = () => {
   ballObj.x += ballObj.dx * hMove;
   ballObj.y += -ballObj.dy * vMove;
   moveBall();
+};
+
+const addPoint = () => {
+  scoreboard += 1;
+  score.innerText = `${scoreboard}`;
 };
 
 const flipY = () => ballObj.dy = -ballObj.dy;
 const flipX = () => ballObj.dx = -ballObj.dx;
 
 const lose = () => {
-  clearInterval(start);
-  alert(`
-  PONG
-  ${'-'.repeat(10)}
-  You lost.
-  Score: ${scoreboard}
-  Highest Score: ${highestScore}`);
   reset();
+  alert(`
+    PONG
+    ${'-'.repeat(10)}
+    You lost.
+    Score: ${scoreboard}
+    Highest Score: ${highestScore}`);
+  clearInterval(start);
 };
 
 const deflect = () => {
-  if (Math.random() < 0.5) {
-    vMove *= 1.05;
-  } else {
-    hMove *= 1.05;
-  }
-}
+  (Math.random() < 0.5) ? vMove *= 1.05 : hMove *= 1.05;
+};
 
 const checkForCollision = () => {
   const x = ballObj.x; const y = ballObj.y;
@@ -76,32 +76,19 @@ const checkForCollision = () => {
   const pBottom = pTop + 100;
   boardH = board.offsetHeight; boardW = board.offsetWidth;
 
-  if (y < 0) {
+  if (y <= 0) {
     // Ball hits top border
     return true;
-  } else if (x > boardW - ballObj.size){
+  } else if (x >= boardW - ballObj.size){
     return true;
   } else if (y >= boardH - ballObj.size) {
     return true;
-  } else if (x <= 0 && y >= (pTop - ballObj.size) && y < pBottom) {
+  } else if (x <= 0 && y >= (pTop - ballObj.size) && y <= pBottom) {
     return true;
   } else {
     return false;
   }
 };
-
-// const checkDifficulty = () => {
-//   if (easy.checked) {
-//     hard.nextElementSibling.style.color = 'white';
-//     ball.style.background = 'white';
-
-//   } else if (normal.checked) {
-//     hard.nextElementSibling.style.color = 'white';
-//     ball.style.background = 'white';
-//   } else if (hard.checked) {
-//
-//   }
-// };
 
 const play = () => {
   const x = ballObj.x; const y = ballObj.y;
@@ -144,22 +131,15 @@ const play = () => {
       move();
     }
   }
-  if (ballObj.x <= - 1) {lose();}
+  if (ballObj.x <= - 10) {lose();}
 };
 
 const startGame = () => {
   clearInterval(start);
   createBall();
   reset();
-  start = setInterval( play, 1000/50);
-};
-
-const addPoint = () => {
-  scoreboard += 1;
-  score.innerText = `${scoreboard}`;
+  start = setInterval( play, 1000/60);
 };
 
 body.addEventListener('mousemove', movePaddle);
 body.addEventListener('keydown', startGame);
-
-// Math.random() < 0.5
