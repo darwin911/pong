@@ -62,13 +62,13 @@ const flipY = () => ballObj.dy = -ballObj.dy;
 const flipX = () => ballObj.dx = -ballObj.dx;
 
 const lose = () => {
-  reset();
   alert(`
     PONG
     ${'-'.repeat(15)}
     You lost.
     Score: ${scoreboard}
     Highest Score: ${highestScore}`);
+    reset();
   clearInterval(start);
 };
 

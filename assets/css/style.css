@@ -16,6 +16,7 @@ body {
   background: -o-linear-gradient(left, #4b6cb7 0%, #182848 100%);
   background: linear-gradient(to right, #4b6cb7 0%, #182848 100%);
   color: rgb(250, 250, 250);
+  background: black;
   position: relative;
   margin: 0;
   max-height: 100vh;
@@ -60,7 +61,7 @@ body {
 .paddle {
   height: var(--paddle-height);
   width: var(--paddle-width);
-  background: #aaa;
+  background: #fff;
   position: absolute;
   top: 40%; right: 0; bottom: 0; left: 0px;
   cursor: pointer;
@@ -84,8 +85,8 @@ fieldset {
 }
 
 @media screen and (max-width: 500px) {
-  html {
-    /* --ball-size: 20px; */
+  .board {
+    width: 100vw;
   }
   fieldset {
     font-size: .75rem;
