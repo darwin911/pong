@@ -15,8 +15,8 @@ let boardW = board.offsetWidth;
 let boardH = board.offsetHeight;
 let scoreboard = 0;
 let highestScore = 0;
-let hMove = 5;
-let vMove = 5;
+let hMove = 1;
+let vMove = 1;
 
 const movePaddle = e => {
   const mouseY = e.clientY;
@@ -30,7 +30,7 @@ const reset = () => {
   ballObj.x = (boardW / 2) - ballObj.size;
   ballObj.y = (boardH / 2) - ballObj.size;
   ballObj.dx = 1; ballObj.dy = 1;
-  hMove = 5; vMove = 5;
+  hMove = 8; vMove = 5;
   score.innerText = `${scoreboard = 0}`;
 };
 
@@ -66,9 +66,7 @@ const lose = () => {
   clearInterval(start);
 };
 
-const deflect = () => {
-  (Math.random() < 0.5) ? vMove *= 1.05 : hMove *= 1.05;
-};
+const deflect = () => (Math.random() < 0.5) ? vMove *= 1.05 : hMove *= 1.05;
 
 const checkForCollision = () => {
   const x = ballObj.x; const y = ballObj.y;

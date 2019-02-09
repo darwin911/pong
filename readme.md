@@ -1,5 +1,5 @@
 ##### Project 1 — WDI — Darwin Smith — 02/07/2019 
-[Github](https://github.com/darwin911/pong)
+[Try it here!](https://pong-js.netlify.com/)
 
 # **PONG!**
 
