@@ -10,13 +10,13 @@ const easy = body.querySelector('#easy');
 const normal = body.querySelector('#normal');
 const hard = body.querySelector('#hard');
 const ballObj = { x: 0, y: 0, dx: 1, dy: 1, size: 40};
-let start;
 let boardW = board.offsetWidth;
 let boardH = board.offsetHeight;
 let scoreboard = 0;
 let highestScore = 0;
 let hMove = 1;
 let vMove = 1;
+let start;
 
 const movePaddle = e => {
   const mouseY = e.clientY;
@@ -65,7 +65,7 @@ const lose = () => {
   reset();
   alert(`
     PONG
-    ${'-'.repeat(10)}
+    ${'-'.repeat(15)}
     You lost.
     Score: ${scoreboard}
     Highest Score: ${highestScore}`);
@@ -81,9 +81,8 @@ const checkForCollision = () => {
   boardH = board.offsetHeight; boardW = board.offsetWidth;
 
   if (y <= 0) {
-    // Ball hits top border
     return true;
-  } else if (x >= boardW - ballObj.size){
+  } else if (x >= boardW - ballObj.size) {
     return true;
   } else if (y >= boardH - ballObj.size) {
     return true;
@@ -135,7 +134,7 @@ const play = () => {
       move();
     }
   }
-  if (ballObj.x <= - 10) {lose();}
+  if (ballObj.x <= - 5) lose();
 };
 
 const startGame = () => {
