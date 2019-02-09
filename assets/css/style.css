@@ -8,6 +8,7 @@ html {
   --ball-size: 40px;
   --paddle-width: 10px;
   --paddle-height: 100px;
+  max-height: 100vh;
 }
 body {
   font-family: 'Raleway', 'Helvetica', sans-serif;

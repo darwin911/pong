@@ -1,6 +1,6 @@
 const body = document.body;
 const banner = body.querySelector('#banner');
-const startButton = body.querySelector('#start-button');
+const startBtn = body.querySelector('#start-btn');
 const title = body.querySelector('#title');
 const score = body.querySelector('#score');
 const board = body.querySelector('#board');
@@ -22,6 +22,12 @@ const movePaddle = e => {
   const mouseY = e.clientY;
   if (mouseY > board.offsetTop  && mouseY < (board.offsetHeight + 100)) {
     paddle.style.top = `${mouseY - (board.offsetTop) - 50}px`;
+  } else if (mouseY === undefined) {
+    const touchY = e.targetTouches[0].clientY;
+    e.preventDefault();
+    if (touchY > board.offsetTop  && touchY < (board.offsetHeight + 100)) {
+      paddle.style.top = `${touchY - (board.offsetTop) - 50}px`;
+    }
   }
 };
 
@@ -81,7 +87,7 @@ const checkForCollision = () => {
     return true;
   } else if (y >= boardH - ballObj.size) {
     return true;
-  } else if (x <= 0 && y >= (pTop - ballObj.size) && y <= pBottom) {
+  } else if (x <= 1 && y >= (pTop - ballObj.size) && y <= pBottom) {
     return true;
   } else {
     return false;
@@ -98,7 +104,7 @@ const play = () => {
   if (!checkForCollision()) {
     move();
   } else {
-
+    console.log('collision');
     if (dx >= 0 && dy >= 0) {
       (y < 5) ? flipY() : flipX();
       move();
@@ -140,4 +146,6 @@ const startGame = () => {
 };
 
 body.addEventListener('mousemove', movePaddle);
+board.addEventListener('touchmove', movePaddle);
 body.addEventListener('keydown', startGame);
+startBtn.addEventListener('click', startGame)
