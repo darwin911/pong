@@ -109,6 +109,7 @@ const play = () => {
 };
 
 const startGame = () => {
+  document.documentElement.requestFullscreen();
   clearInterval(start);
   createBall();
   reset();
