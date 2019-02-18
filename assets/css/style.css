@@ -1,26 +1,19 @@
-@import url('https://fonts.googleapis.com/css?family=Major+Mono+Display|Raleway:400,700');
+@import url('https://fonts.googleapis.com/css?family=Major+Mono+Display');
 
 /* General Styles */
 *, *::before, *::after {
   box-sizing: border-box;
 }
 html {
-  --ball-size: 40px;
-  --paddle-width: 10px;
-  --paddle-height: 100px;
   max-height: 100vh;
 }
 body {
-  font-family: 'Raleway', 'Helvetica', sans-serif;
-  background: -webkit-linear-gradient(left, #4b6cb7 0%, #182848 100%);
-  background: -o-linear-gradient(left, #4b6cb7 0%, #182848 100%);
-  background: linear-gradient(to right, #4b6cb7 0%, #182848 100%);
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: rgb(250, 250, 250);
   background: black;
   position: relative;
   margin: 0;
   max-height: 100vh;
-  user-select: none;
 }
 /* /General Styles */
 
@@ -42,6 +35,36 @@ body {
   text-align: center;
 }
 
+.start-btn {
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 400;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+  background-color: #444;
+  border: 1px solid transparent;
+  border-color: #444;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+}
+
+.start-btn:hover {
+  color: #fff;
+  background-color: #313131;
+  border-color: #2b2a2a;
+}
+
+.start-btn:focus {
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(96, 96, 96, 0.5);
+          box-shadow: 0 0 0 0.2rem rgba(96, 96, 96, 0.5);
+}
 .score {
   font-weight: 500;
   font-size: 3.5rem;
@@ -53,15 +76,14 @@ body {
   border: 0;
   width: 100vw;
   height: 85vh;
-  position: relative;
   margin: 0 0 0 auto;
   cursor: crosshair;
   overflow: hidden;
 }
 
 .paddle {
-  height: var(--paddle-height);
-  width: var(--paddle-width);
+  height: 100px;
+  width: 10px;
   background: #fff;
   position: absolute;
   top: 40%; right: 0; bottom: 0; left: 0px;
@@ -70,8 +92,8 @@ body {
 }
 
 .ball {
-  width: var(--ball-size);
-  height: var(--ball-size);
+  width: 40px;
+  height: 40px;
   background: rgb(255, 255, 255);
   background: -webkit-linear-gradient(left, #f8ff00 0%, #3ad59f 100%);
   background: -o-linear-gradient(left, #f8ff00 0%, #3ad59f 100%);

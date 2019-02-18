@@ -6,9 +6,7 @@ const score = body.querySelector('#score');
 const board = body.querySelector('#board');
 const paddle = body.querySelector('#paddle');
 const ball = body.querySelector('#ball');
-const ballObj = { x: 100, y: 100, dx: 1, dy: 1, size: 40};
-let boardW = board.offsetWidth;
-let boardH = board.offsetHeight;
+const ballObj = { x: 0, y: 0, dx: 1, dy: 1, size: 40};
 let scoreboard = 0;
 let highestScore = 0;
 let hMove = 1;
@@ -31,7 +29,7 @@ const movePaddle = e => {
 const reset = () => {
   if (scoreboard > highestScore) highestScore = scoreboard;
   ballObj.x = (window.innerWidth / 2) - ballObj.size;
-  ballObj.y = window.innerHeight / 2 - ballObj.size;
+  ballObj.y = (window.innerHeight / 2) - ballObj.size;
   ballObj.dx = 1; ballObj.dy = (Math.random() < 0.5) ? 1 : -1;
   hMove = 7; vMove = 5;
   score.innerText = `${scoreboard = 0}`;
@@ -71,15 +69,14 @@ const checkForCollision = () => {
   const x = ballObj.x; const y = ballObj.y;
   const pTop = paddle.offsetTop;
   const pBottom = pTop + 100;
-  boardH = board.offsetHeight; boardW = board.offsetWidth;
 
   if (y <= 0) {
     return true;
-  } else if (x >= boardW - ballObj.size) {
+  } else if (x >= board.offsetWidth - ballObj.size) {
     return true;
-  } else if (y >= boardH - ballObj.size) {
+  } else if (y >= board.offsetHeight - ballObj.size) {
     return true;
-  } else if (x <= -1 && y >= (pTop - ballObj.size) && y <= pBottom) {
+  } else if (x <= 10 && y >= (pTop - ballObj.size) && y <= pBottom) {
     return true;
   } else {
     return false;
@@ -87,32 +84,28 @@ const checkForCollision = () => {
 };
 
 const play = () => {
-  
   const x = ballObj.x; const y = ballObj.y;
   const dx = ballObj.dx; const dy = ballObj.dy;
-  
-  boardH = board.offsetHeight; boardW = board.offsetWidth;
 
-  if (!checkForCollision()) {
-  } else if (dx >= 0 && dy >= 0) {
-      (y < 5) ? flipY() : flipX();
+  if (!checkForCollision()) {} else if (dx >= 0 && dy >= 0) {
+      (y <= 1) ? flipY() : flipX();
   } else if (dx >= 0 && dy <= 0) {
-      (x >= boardW - ballObj.size) ? flipX() : flipY();
+      (x >= board.offsetWidth - ballObj.size) ? flipX() : flipY();
   } else if (dx <= 0 && dy <= 0) {
-      if (y >= boardH - ballObj.size) {
+      if (y >= board.offsetHeight - ballObj.size) {
         flipY();
-      } else if (x <= 0) {
+      } else if (x <= 10) {
         flipX(); addPoint(); deflect();
       }
   } else if (dx <= 0 && dy >= 0) {
-      if (y <= 5) {
+      if (y <= 1) {
         flipY();
-      } else if (x <= 0) {
+      } else if (x <= 10) {
         flipX(); addPoint(); deflect();
       }
   }
   move();
-    if (ballObj.x <= - 15) lose();
+    if (ballObj.x <= -1) lose();
 };
 
 const startGame = () => {
