@@ -43,14 +43,15 @@ body {
 }
 
 .score {
-  font-weight: 700;
+  font-weight: 500;
   font-size: 3.5rem;
+  min-width: 92px;
 }
 
 .board {
   position: relative;
   border: 0;
-  width: 90vw;
+  width: 100vw;
   height: 85vh;
   position: relative;
   margin: 0 0 0 auto;
@@ -87,6 +88,10 @@ fieldset {
 @media screen and (max-width: 500px) {
   .board {
     width: 100vw;
+  }
+  .score {
+    font-size: 3rem;
+    min-width: 79px;
   }
   fieldset {
     font-size: .75rem;
