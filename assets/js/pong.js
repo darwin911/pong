@@ -108,8 +108,8 @@ const play = () => {
     if (ballObj.x <= -1) lose();
 };
 
-const startGame = () => {
-  document.documentElement.requestFullscreen();
+const startGame = () => {  
+  (navigator.userAgent.indexOf('Android') !== -1) && document.documentElement.requestFullscreen()
   clearInterval(start);
   createBall();
   reset();
