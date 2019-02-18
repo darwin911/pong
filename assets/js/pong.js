@@ -79,7 +79,7 @@ const checkForCollision = () => {
     return true;
   } else if (y >= boardH - ballObj.size) {
     return true;
-  } else if (x <= 1 && y >= (pTop - ballObj.size) && y <= pBottom) {
+  } else if (x <= -1 && y >= (pTop - ballObj.size) && y <= pBottom) {
     return true;
   } else {
     return false;
@@ -101,13 +101,13 @@ const play = () => {
   } else if (dx <= 0 && dy <= 0) {
       if (y >= boardH - ballObj.size) {
         flipY();
-      } else if (x < 2) {
+      } else if (x <= 0) {
         flipX(); addPoint(); deflect();
       }
   } else if (dx <= 0 && dy >= 0) {
       if (y <= 5) {
         flipY();
-      } else if (x < 2) {
+      } else if (x <= 0) {
         flipX(); addPoint(); deflect();
       }
   }
