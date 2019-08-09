@@ -4,32 +4,30 @@
 
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <title>PONG!</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <script defer src="assets/js/pong.js"></script>
+  </head>
 
-<head>
-
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-  <title>PONG!</title>
-  <link rel="stylesheet" href="assets/css/style.css">
-  <script defer src="assets/js/pong.js"></script>
-
-</head>
-
-<body>
-
-  <header id="banner" class="banner">
-
-    <h1 id="title" class="title">pong</h1>
-    <button id="start-btn" class="start-btn" >Start</button>
-    <h4 id="score" class="score">0</h4>
-    <!--
+  <body>
+    <header id="banner" class="banner">
+      <h1 id="title" class="title">pong</h1>
+      <button id="start-btn" class="start-btn">Start</button>
+      <h4 id="score" class="score">0</h4>
+      <!--
     Source code for radio buttons from: https://bootswatch.com/darkly/ which is a bootstrap template and adjusted to it for my needs
      -->
-    <!-- <fieldset>
+      <!-- <fieldset>
       <div class="form-group">
         <div class="custom-control custom-radio">
           <input type="radio" id="easy" name="difficulty" class="custom-control-input" checked="">
@@ -45,16 +43,12 @@
         </div>
       </div>
     </fieldset> -->
-    <!--   /   -->
+      <!--   /   -->
+    </header>
 
-  </header>
-
-  <main id="board" class="board">
-
-    <div id="paddle" class="paddle"></div>
-    <div id="ball" class="ball"></div>
-
-  </main>
-
-</body>
+    <main id="board" class="board">
+      <div id="paddle" class="paddle"></div>
+      <div id="ball" class="ball"></div>
+    </main>
+  </body>
 </html>
