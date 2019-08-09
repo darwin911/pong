@@ -14,10 +14,10 @@ let vMove = 1;
 let start;
 
 const movePaddle = e => {
-  const mouseY = e.clientY;
-  if (mouseY > board.offsetTop && mouseY < board.offsetHeight + 100) {
-    paddle.style.top = `${mouseY - board.offsetTop - 50}px`;
-  } else if (mouseY === undefined) {
+  const mouseX = e.clientX;
+  if (mouseX > board.offsetTop && mouseX < board.offsetHeight + 100) {
+    paddle.style.left = `${mouseX - board.offsetTop - 50}px`;
+  } else if (mouseX === undefined) {
     const touchY = e.targetTouches[0].clientY;
     e.preventDefault();
     if (touchY > board.offsetTop && touchY < board.offsetHeight + 100) {
@@ -101,6 +101,8 @@ const play = () => {
   } else if (dx >= 0 && dy >= 0) {
     y <= 1 ? flipY() : flipX();
   } else if (dx >= 0 && dy <= 0) {
+    console.log('BOOM');
+    debugger;
     x >= board.offsetWidth - ballObj.size ? flipX() : flipY();
   } else if (dx <= 0 && dy <= 0) {
     if (y >= board.offsetHeight - ballObj.size) {
@@ -120,7 +122,7 @@ const play = () => {
     }
   }
   move();
-  if (ballObj.x <= -1) lose();
+  // if (ballObj.y <= -1) lose();
 };
 
 const startGame = () => {

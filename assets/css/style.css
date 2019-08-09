@@ -87,17 +87,18 @@ body {
   margin: 0 0 0 auto;
   cursor: crosshair;
   overflow: hidden;
+  background: tomato;
 }
 
 .paddle {
-  height: 100px;
-  width: 10px;
+  height: 10px;
+  width: 100px;
   background: #fff;
+  margin: 0 auto;
   position: absolute;
-  top: 40%;
+  left: 0;
   right: 0;
-  bottom: 0;
-  left: 0px;
+  bottom: 20px;
   cursor: pointer;
   border-radius: 2px;
 }
