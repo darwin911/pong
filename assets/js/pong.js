@@ -13,7 +13,7 @@ let hMove = 1;
 let vMove = 1;
 let start;
 
-const movePaddle = e => {
+const movePaddle = (e) => {
   const mouseY = e.clientY;
   if (mouseY > board.offsetTop && mouseY < board.offsetHeight + 100) {
     paddle.style.top = `${mouseY - board.offsetTop - 50}px`;
@@ -135,4 +135,4 @@ const startGame = () => {
 body.addEventListener('mousemove', movePaddle);
 board.addEventListener('touchmove', movePaddle);
 body.addEventListener('keydown', startGame);
-body.addEventListener('click', startGame);
+startBtn.addEventListener('click', startGame);
