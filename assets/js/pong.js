@@ -134,5 +134,4 @@ const startGame = () => {
 
 body.addEventListener('mousemove', movePaddle);
 board.addEventListener('touchmove', movePaddle);
-body.addEventListener('keydown', startGame);
 startBtn.addEventListener('click', startGame);
